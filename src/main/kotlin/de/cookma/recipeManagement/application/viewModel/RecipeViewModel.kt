@@ -11,7 +11,7 @@ class RecipeViewModel(
 
         @Id @GeneratedValue(strategy = GenerationType.AUTO)
         @JsonIgnore
-        var id: Long? = 0,
+        var id: Long? = null,
         var recipeId: String = "",
         var title: String = "",
         var subTitle: String = "",

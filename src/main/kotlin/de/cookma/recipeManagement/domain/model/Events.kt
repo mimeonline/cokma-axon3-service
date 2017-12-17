@@ -1,3 +1,13 @@
 package de.cookma.recipeManagement.domain.model
 
-data class RecipeCreatedEvent(val recipeId: String, val title: String, val subTitle: String, val preparation: String)
+data class RecipeCreatedEvent(
+        val recipeId: String,
+        val title: String,
+        val subTitle: String,
+        val preparation: String)
+
+data class RecipeUpdateEvent(
+        val recipeId: String,
+        val title: String,
+        val subTitle: String,
+        val preparation: String)

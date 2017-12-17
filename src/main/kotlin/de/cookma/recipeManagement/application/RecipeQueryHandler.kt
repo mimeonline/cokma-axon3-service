@@ -1,7 +1,8 @@
 package de.cookma.recipeManagement.application
 
+import de.cookma.recipeManagement.application.queryModel.RecipeFindAllQuery
+import de.cookma.recipeManagement.application.queryModel.RecipeFindQuery
 import de.cookma.recipeManagement.infrastructure.repository.RecipeRepository
-import de.cookma.recipeManagement.application.queryModel.RecipeQuery
 import de.cookma.recipeManagement.application.viewModel.RecipeViewModel
 import org.axonframework.queryhandling.QueryHandler
 import org.springframework.beans.factory.annotation.Autowired
@@ -14,7 +15,14 @@ class RecipeQueryHandler {
     lateinit var recipeRepository: RecipeRepository
 
     @QueryHandler
-    fun handle(query: RecipeQuery): RecipeViewModel {
+    fun handle(query: RecipeFindQuery): RecipeViewModel {
         return recipeRepository.findByRecipeId(query.id)
+    }
+
+    @QueryHandler
+    fun handle(query: RecipeFindAllQuery): List<RecipeViewModel> {
+        return recipeRepository.findAll()
+
+
     }
 }

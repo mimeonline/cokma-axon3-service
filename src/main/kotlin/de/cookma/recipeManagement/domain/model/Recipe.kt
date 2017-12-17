@@ -14,11 +14,11 @@ private val logger = KotlinLogging.logger {}
 class Recipe {
 
     @AggregateIdentifier
-    //var recipeId: RecipeId? = null TODO Query Handler spielt noch nicht mit einem Nicht String zusammen
+            //var recipeId: RecipeId? = null TODO Query Handler spielt noch nicht mit einem Nicht String zusammen
     var recipeId: String? = null
     var title: String = ""
     var subTitle: String = ""
-    //    var images: List<Image> = ArrayList() TODO Komplexer Datentyp, wie ist dieser zu integrieren
+    //    var images: List<Image> = ArrayList() TODO Komplexer Datentyp, wie integriert man den?
     //    var ingredients: List<Ingredient> = ArrayList()
     var preparation: String = ""
 
@@ -30,10 +30,23 @@ class Recipe {
         AggregateLifecycle.apply(RecipeCreatedEvent(cmd.recipeId, cmd.title, cmd.subTitle, cmd.preparation))
     }
 
+    @CommandHandler
+    fun handle(cmd: UpdateRecipeCommand) {
+        AggregateLifecycle.apply(RecipeUpdateEvent(cmd.recipeId, cmd.title, cmd.subTitle, cmd.preparation))
+    }
+
     @EventSourcingHandler
     fun on(evt: RecipeCreatedEvent) {
         println(evt)
         recipeId = evt.recipeId
+        title = evt.title
+        subTitle = evt.subTitle
+        preparation = evt.preparation
+    }
+
+    @EventSourcingHandler
+    fun on(evt: RecipeUpdateEvent) {
+        println(evt)
         title = evt.title
         subTitle = evt.subTitle
         preparation = evt.preparation
