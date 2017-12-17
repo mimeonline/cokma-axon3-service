@@ -1,8 +1,5 @@
 package de.cookma.recipeManagement.infrastructure.config
 
-import de.cookma.recipeManagement.domain.model.Recipe
-import org.axonframework.commandhandling.model.Repository
-import org.axonframework.eventsourcing.EventSourcingRepository
 import org.axonframework.eventsourcing.eventstore.EmbeddedEventStore
 import org.axonframework.eventsourcing.eventstore.EventStorageEngine
 import org.axonframework.eventsourcing.eventstore.EventStore

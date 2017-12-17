@@ -1,10 +1,10 @@
 package de.cookma.recipeManagement.application
 
-import de.cookma.recipeManagement.domain.model.RecipeCreatedEvent
-import de.cookma.recipeManagement.infrastructure.repository.RecipeRepository
 import de.cookma.recipeManagement.application.viewModel.RecipeViewModel
+import de.cookma.recipeManagement.domain.model.RecipeCreatedEvent
 import de.cookma.recipeManagement.domain.model.RecipeDeletedEvent
 import de.cookma.recipeManagement.domain.model.RecipeUpdateEvent
+import de.cookma.recipeManagement.infrastructure.repository.RecipeRepository
 import org.axonframework.eventhandling.EventHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
