@@ -38,7 +38,7 @@ class Recipe {
 
     @CommandHandler
     fun handle(cmd: DeleteRecipeCommand) {
-        println("Delete Command "+cmd)
+        println("Delete Command " + cmd)
         AggregateLifecycle.apply(RecipeDeletedEvent(cmd.recipeId))
     }
 
@@ -61,7 +61,7 @@ class Recipe {
 
     @EventSourcingHandler
     fun on(evt: RecipeDeletedEvent) {
-        println("Delete Event: " +evt)
+        println("Delete Event: " + evt)
         markDeleted()
     }
 }

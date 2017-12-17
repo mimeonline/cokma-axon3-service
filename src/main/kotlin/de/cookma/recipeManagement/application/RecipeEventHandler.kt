@@ -33,7 +33,7 @@ class RecipeEventHandler {
     }
 
     @EventHandler
-    fun handle(evt: RecipeDeletedEvent){
+    fun handle(evt: RecipeDeletedEvent) {
         recipeRepository.deleteByRecipeId(evt.recipeId)
     }
 

@@ -35,6 +35,7 @@ class RecipeApplicationService {
     fun findAllRecipe(): CompletableFuture<List<*>>? {
         return queryGateway.send(RecipeFindAllQuery(), List::class.java)
     }
+
     fun createRecipe(recipe: RecipeDto): CompletableFuture<CreateRecipeCommand> {
         return commandGateway.send<CreateRecipeCommand>(
                 CreateRecipeCommand(
