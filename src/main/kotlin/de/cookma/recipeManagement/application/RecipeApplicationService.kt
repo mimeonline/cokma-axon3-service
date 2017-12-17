@@ -5,6 +5,7 @@ import de.cookma.recipeManagement.application.queryModel.RecipeFindAllQuery
 import de.cookma.recipeManagement.application.queryModel.RecipeFindQuery
 import de.cookma.recipeManagement.application.viewModel.RecipeViewModel
 import de.cookma.recipeManagement.domain.model.CreateRecipeCommand
+import de.cookma.recipeManagement.domain.model.DeleteRecipeCommand
 import de.cookma.recipeManagement.domain.model.UpdateRecipeCommand
 import de.cookma.recipeManagement.domain.model.createRecipeId
 import org.axonframework.commandhandling.gateway.CommandGateway
@@ -50,5 +51,9 @@ class RecipeApplicationService {
                         recipe.title,
                         recipe.subTitle,
                         recipe.preparation))
+    }
+
+    fun deleteRecipe(id: String) {
+        commandGateway.send<DeleteRecipeCommand>(DeleteRecipeCommand(id))
     }
 }

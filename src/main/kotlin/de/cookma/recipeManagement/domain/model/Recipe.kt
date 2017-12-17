@@ -4,6 +4,7 @@ import mu.KotlinLogging
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.commandhandling.model.AggregateIdentifier
 import org.axonframework.commandhandling.model.AggregateLifecycle
+import org.axonframework.commandhandling.model.AggregateLifecycle.markDeleted
 import org.axonframework.eventsourcing.EventSourcingHandler
 import org.axonframework.spring.stereotype.Aggregate
 
@@ -35,6 +36,12 @@ class Recipe {
         AggregateLifecycle.apply(RecipeUpdateEvent(cmd.recipeId, cmd.title, cmd.subTitle, cmd.preparation))
     }
 
+    @CommandHandler
+    fun handle(cmd: DeleteRecipeCommand) {
+        println("Delete Command "+cmd)
+        AggregateLifecycle.apply(RecipeDeletedEvent(cmd.recipeId))
+    }
+
     @EventSourcingHandler
     fun on(evt: RecipeCreatedEvent) {
         println(evt)
@@ -50,5 +57,11 @@ class Recipe {
         title = evt.title
         subTitle = evt.subTitle
         preparation = evt.preparation
+    }
+
+    @EventSourcingHandler
+    fun on(evt: RecipeDeletedEvent) {
+        println("Delete Event: " +evt)
+        markDeleted()
     }
 }

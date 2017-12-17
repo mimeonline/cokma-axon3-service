@@ -36,10 +36,15 @@ class RecipeController {
     }
 
     @PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
     fun updateRecipe(
             @RequestBody recipe: RecipeDto,
             @PathVariable("id") id: String): CompletableFuture<UpdateRecipeCommand> {
         return recipeApplicationService.updateRecipe(id, recipe)
     }
+
+    @DeleteMapping("/{id}")
+    fun deleteRecipe(@PathVariable("id") id: String) {
+        recipeApplicationService.deleteRecipe(id)
+    }
+
 }

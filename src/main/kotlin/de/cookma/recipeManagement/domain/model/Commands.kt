@@ -13,3 +13,6 @@ data class UpdateRecipeCommand(
         val title: String,
         val subTitle: String,
         val preparation: String)
+
+data class DeleteRecipeCommand(
+        @TargetAggregateIdentifier val recipeId: String)

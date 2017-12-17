@@ -11,3 +11,5 @@ data class RecipeUpdateEvent(
         val title: String,
         val subTitle: String,
         val preparation: String)
+
+data class RecipeDeletedEvent(val recipeId: String)

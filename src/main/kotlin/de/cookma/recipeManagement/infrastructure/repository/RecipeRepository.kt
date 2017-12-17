@@ -8,5 +8,6 @@ interface RecipeRepository : JpaRepository<RecipeViewModel, Long> {
 
     fun findByTitle(@Param("title") title: String): RecipeViewModel
     fun findByRecipeId(@Param("recipeId") title: String): RecipeViewModel
+    fun deleteByRecipeId(@Param("recipeId") title: String)
 
 }
