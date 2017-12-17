@@ -1,4 +1,4 @@
-package de.cookma.recipeManagement.infrastructure.rest.model
+package de.cookma.recipeManagement.application.dtoModel
 
 // TODO kann bestimmt auch als data class integriert werden
 class RecipeDto(

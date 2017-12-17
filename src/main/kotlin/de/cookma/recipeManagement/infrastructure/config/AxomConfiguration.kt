@@ -1,4 +1,4 @@
-package de.cookma.recipeManagement.infrastructure
+package de.cookma.recipeManagement.infrastructure.config
 
 import de.cookma.recipeManagement.domain.model.Recipe
 import org.axonframework.commandhandling.model.Repository
@@ -24,9 +24,9 @@ class AxomConfiguration {
         return EmbeddedEventStore(eventStorageEngine())
     }
 
-    @Bean
-    fun recipeRepository(): Repository<Recipe> {
-        return EventSourcingRepository(Recipe::class.java, eventStore())
-    }
+//    @Bean
+//    fun recipeRepository(): Repository<Recipe> {
+//        return EventSourcingRepository(Recipe::class.java, eventStore())
+//    }
 
 }
