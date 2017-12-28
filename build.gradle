@@ -1,8 +1,8 @@
 buildscript {
 	ext {
-		kotlinVersion = '1.2.0'
+		kotlinVersion = '1.2.10'
 		springBootVersion = '1.5.8.RELEASE'
-        axonFrameworkVersion = '3.1'
+        axonFrameworkVersion = '3.1.1'
 	}
 	repositories {
 		mavenCentral()
@@ -11,6 +11,7 @@ buildscript {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
 		classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+
 	}
 }
 
@@ -22,6 +23,12 @@ apply plugin: 'org.springframework.boot'
 group = 'de.cookma'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+
+jar {
+	baseName = 'cookma-service'
+	version =  '0.1.0'
+}
+
 compileKotlin {
 	kotlinOptions.jvmTarget = "1.8"
 }
@@ -33,15 +40,14 @@ repositories {
 	mavenCentral()
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
 	compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}")
 	compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     compile group: 'org.axonframework', name: 'axon-core', version: "${axonFrameworkVersion}"
-    compile group: 'org.axonframework', name: 'axon-spring-boot-starter', version: '3.1'
-    compile('io.github.microutils:kotlin-logging:1.4.7')
+    compile group: 'org.axonframework', name: 'axon-spring-boot-starter', version: "${axonFrameworkVersion}"
+    compile('io.github.microutils:kotlin-logging:1.4.8')
     compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.9.2'
 
 
@@ -50,7 +56,7 @@ dependencies {
 
 	// compile "org.slf4j:slf4j-simple:1.7.+"
 	testCompile("junit:junit:4.12")
-    testCompile group: 'org.axonframework', name: 'axon-test', version: '3.1'
-    testCompile(group: 'org.axonframework', name: 'axon-spring', version: '3.1')
+    testCompile group: 'org.axonframework', name: 'axon-test', version: "${axonFrameworkVersion}"
+    testCompile(group: 'org.axonframework', name: 'axon-spring', version: "${axonFrameworkVersion}")
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
