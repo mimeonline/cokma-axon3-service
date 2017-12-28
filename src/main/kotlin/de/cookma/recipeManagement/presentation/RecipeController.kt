@@ -13,6 +13,7 @@ import java.util.concurrent.CompletableFuture
 
 @RestController
 @RequestMapping("/recipes")
+@CrossOrigin
 class RecipeController {
 
     @Autowired

@@ -15,6 +15,7 @@ class RecipeViewModel(
         var recipeId: String = "",
         var title: String = "",
         var subTitle: String = "",
+        var shortDescription: String  = "",
         var preparation: String = "") {
 
 }

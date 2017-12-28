@@ -18,7 +18,7 @@ class RecipeEventHandler {
     @EventHandler
     fun handle(evt: RecipeCreatedEvent) {
         println(evt)
-        recipeRepository.save(RecipeViewModel(null, evt.recipeId, evt.title, evt.subTitle, evt.preparation))
+        recipeRepository.save(RecipeViewModel(null, evt.recipeId, evt.title, evt.subTitle, evt.shortDescription, evt.preparation))
     }
 
     @EventHandler
@@ -27,6 +27,7 @@ class RecipeEventHandler {
         var recipe: RecipeViewModel = recipeRepository.findByRecipeId(evt.recipeId)
         recipe.title = evt.title
         recipe.subTitle = evt.subTitle
+        recipe.shortDescription = evt.shortDescription
         recipe.preparation = evt.preparation
         println(recipe)
         recipeRepository.save(recipe)

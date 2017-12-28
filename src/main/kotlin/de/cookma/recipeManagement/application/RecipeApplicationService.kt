@@ -42,6 +42,7 @@ class RecipeApplicationService {
                         createRecipeId().id,
                         recipe.title,
                         recipe.subTitle,
+                        recipe.shortDescription,
                         recipe.preparation))
     }
 
@@ -51,6 +52,7 @@ class RecipeApplicationService {
                         id,
                         recipe.title,
                         recipe.subTitle,
+                        recipe.shortDescription,
                         recipe.preparation))
     }
 

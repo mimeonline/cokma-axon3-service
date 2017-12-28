@@ -19,6 +19,7 @@ class Recipe {
     var recipeId: String? = null
     var title: String = ""
     var subTitle: String = ""
+    var shortDescription: String = ""
     //    var images: List<Image> = ArrayList() TODO Komplexer Datentyp, wie integriert man den?
     //    var ingredients: List<Ingredient> = ArrayList()
     var preparation: String = ""
@@ -28,12 +29,12 @@ class Recipe {
     @CommandHandler
     constructor(cmd: CreateRecipeCommand) {
         println(cmd)
-        AggregateLifecycle.apply(RecipeCreatedEvent(cmd.recipeId, cmd.title, cmd.subTitle, cmd.preparation))
+        AggregateLifecycle.apply(RecipeCreatedEvent(cmd.recipeId, cmd.title, cmd.subTitle, cmd.shortDescription, cmd.preparation))
     }
 
     @CommandHandler
     fun handle(cmd: UpdateRecipeCommand) {
-        AggregateLifecycle.apply(RecipeUpdateEvent(cmd.recipeId, cmd.title, cmd.subTitle, cmd.preparation))
+        AggregateLifecycle.apply(RecipeUpdateEvent(cmd.recipeId, cmd.title, cmd.subTitle, cmd.shortDescription, cmd.preparation))
     }
 
     @CommandHandler
@@ -48,6 +49,7 @@ class Recipe {
         recipeId = evt.recipeId
         title = evt.title
         subTitle = evt.subTitle
+        shortDescription = evt.shortDescription
         preparation = evt.preparation
     }
 
@@ -56,6 +58,7 @@ class Recipe {
         println(evt)
         title = evt.title
         subTitle = evt.subTitle
+        shortDescription = evt.shortDescription
         preparation = evt.preparation
     }
 

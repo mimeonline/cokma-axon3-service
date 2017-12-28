@@ -4,5 +4,6 @@ package de.cookma.recipeManagement.application.dtoModel
 class RecipeDto(
         var title: String,
         var subTitle: String,
+        var shortDescription: String,
         var preparation: String
 )
