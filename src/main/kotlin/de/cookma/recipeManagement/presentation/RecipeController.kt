@@ -27,7 +27,7 @@ class RecipeController {
     @GetMapping("/{id}")
     fun getRecipe(@PathVariable("id") id: String): CompletableFuture<RecipeViewModel> {
         println(id)
-        return recipeApplicationService.findRecipe(id)
+        return recipeApplicationService.findRecipeById(id)
     }
 
     @PostMapping

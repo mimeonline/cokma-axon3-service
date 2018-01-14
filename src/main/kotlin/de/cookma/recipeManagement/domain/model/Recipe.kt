@@ -17,9 +17,13 @@ class Recipe {
     @AggregateIdentifier
             //var recipeId: RecipeId? = null TODO Query Handler spielt noch nicht mit einem Nicht String zusammen
     var recipeId: String? = null
-    var title: String = ""
-    var subTitle: String = ""
-    var shortDescription: String = ""
+    var name: String = ""
+    var effort: String = ""
+    var category: String = ""
+    var nutrition: List<String> = ArrayList()
+    var preparationTime: Int = 0
+    var restTime: Int = 0
+    var ingredient: String = ""
     //    var images: List<Image> = ArrayList() TODO Komplexer Datentyp, wie integriert man den?
     //    var ingredients: List<Ingredient> = ArrayList()
     var preparation: String = ""
@@ -29,12 +33,33 @@ class Recipe {
     @CommandHandler
     constructor(cmd: CreateRecipeCommand) {
         println(cmd)
-        AggregateLifecycle.apply(RecipeCreatedEvent(cmd.recipeId, cmd.title, cmd.subTitle, cmd.shortDescription, cmd.preparation))
+        AggregateLifecycle.apply(
+                RecipeCreatedEvent(
+                        cmd.recipeId,
+                        cmd.name,
+                        cmd.effort,
+                        cmd.category,
+                        cmd.nutrition,
+                        cmd.preparationTime,
+                        cmd.restTime,
+                        cmd.ingredient,
+                        cmd.preparation)
+        )
     }
 
     @CommandHandler
     fun handle(cmd: UpdateRecipeCommand) {
-        AggregateLifecycle.apply(RecipeUpdateEvent(cmd.recipeId, cmd.title, cmd.subTitle, cmd.shortDescription, cmd.preparation))
+        AggregateLifecycle.apply(
+                RecipeUpdateEvent(
+                        cmd.recipeId,
+                        cmd.name,
+                        cmd.effort,
+                        cmd.category,
+                        cmd.nutrition,
+                        cmd.preparationTime,
+                        cmd.restTime,
+                        cmd.ingredient,
+                        cmd.preparation))
     }
 
     @CommandHandler
@@ -47,18 +72,26 @@ class Recipe {
     fun on(evt: RecipeCreatedEvent) {
         println(evt)
         recipeId = evt.recipeId
-        title = evt.title
-        subTitle = evt.subTitle
-        shortDescription = evt.shortDescription
+        name = evt.name
+        effort = evt.effort
+        category = evt.category
+        nutrition = evt.nutrition
+        preparationTime = evt.preparationTime
+        restTime = evt.restTime
+        ingredient = evt.ingredient
         preparation = evt.preparation
     }
 
     @EventSourcingHandler
     fun on(evt: RecipeUpdateEvent) {
         println(evt)
-        title = evt.title
-        subTitle = evt.subTitle
-        shortDescription = evt.shortDescription
+        name = evt.name
+        effort = evt.effort
+        category = evt.category
+        nutrition = evt.nutrition
+        preparationTime = evt.preparationTime
+        restTime = evt.restTime
+        ingredient = evt.ingredient
         preparation = evt.preparation
     }
 

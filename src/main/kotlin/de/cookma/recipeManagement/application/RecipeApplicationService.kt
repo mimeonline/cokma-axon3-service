@@ -2,7 +2,7 @@ package de.cookma.recipeManagement.application
 
 import de.cookma.recipeManagement.application.dtoModel.RecipeDto
 import de.cookma.recipeManagement.application.queryModel.RecipeFindAllQuery
-import de.cookma.recipeManagement.application.queryModel.RecipeFindQuery
+import de.cookma.recipeManagement.application.queryModel.RecipeFindQueryById
 import de.cookma.recipeManagement.application.viewModel.RecipeViewModel
 import de.cookma.recipeManagement.domain.model.CreateRecipeCommand
 import de.cookma.recipeManagement.domain.model.DeleteRecipeCommand
@@ -23,9 +23,9 @@ class RecipeApplicationService {
     @Autowired
     lateinit var queryGateway: QueryGateway
 
-    fun findRecipe(id: String): CompletableFuture<RecipeViewModel> {
+    fun findRecipeById(id: String): CompletableFuture<RecipeViewModel> {
         println(id)
-        return queryGateway.send(RecipeFindQuery(id), RecipeViewModel::class.java)
+        return queryGateway.send(RecipeFindQueryById(id), RecipeViewModel::class.java)
     }
 
     /**
@@ -40,9 +40,13 @@ class RecipeApplicationService {
         return commandGateway.send<CreateRecipeCommand>(
                 CreateRecipeCommand(
                         createRecipeId().id,
-                        recipe.title,
-                        recipe.subTitle,
-                        recipe.shortDescription,
+                        recipe.name,
+                        recipe.effort,
+                        recipe.category,
+                        recipe.nutrition,
+                        recipe.preparationTime,
+                        recipe.restTime,
+                        recipe.ingredient,
                         recipe.preparation))
     }
 
@@ -50,9 +54,13 @@ class RecipeApplicationService {
         return commandGateway.send<UpdateRecipeCommand>(
                 UpdateRecipeCommand(
                         id,
-                        recipe.title,
-                        recipe.subTitle,
-                        recipe.shortDescription,
+                        recipe.name,
+                        recipe.effort,
+                        recipe.category,
+                        recipe.nutrition,
+                        recipe.preparationTime,
+                        recipe.restTime,
+                        recipe.ingredient,
                         recipe.preparation))
     }
 

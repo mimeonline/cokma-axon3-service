@@ -2,12 +2,13 @@ package de.cookma.recipeManagement.infrastructure.repository
 
 import de.cookma.recipeManagement.application.viewModel.RecipeViewModel
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.repository.query.Param
 
-interface RecipeRepository : JpaRepository<RecipeViewModel, Long> {
+interface RecipeRepository : MongoRepository<RecipeViewModel, Long> {
 
-    fun findByTitle(@Param("title") title: String): RecipeViewModel
-    fun findByRecipeId(@Param("recipeId") title: String): RecipeViewModel
-    fun deleteByRecipeId(@Param("recipeId") title: String)
+    fun findByName(@Param("name") name: String): RecipeViewModel
+    fun findByRecipeId(@Param("recipeId") recipeId: String): RecipeViewModel
+    fun deleteByRecipeId(@Param("recipeId") recipeId: String)
 
 }

@@ -1,21 +1,22 @@
 package de.cookma.recipeManagement.application.viewModel
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
+import javax.persistence.*
 
-@Entity
+
 class RecipeViewModel(
 
-        @Id @GeneratedValue(strategy = GenerationType.AUTO)
+        @Id
         @JsonIgnore
-        var id: Long? = null,
+        var id: String? = null,
         var recipeId: String = "",
-        var title: String = "",
-        var subTitle: String = "",
-        var shortDescription: String  = "",
+        var name: String = "",
+        var effort: String = "",
+        var category: String = "",
+        var nutrition: List<String> = ArrayList(),
+        var preparationTime: Int = 0,
+        var restTime: Int = 0,
+        var ingredient: String = "",
         var preparation: String = "") {
 
 }

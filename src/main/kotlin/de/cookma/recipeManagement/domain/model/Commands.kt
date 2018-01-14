@@ -4,17 +4,24 @@ import org.axonframework.commandhandling.TargetAggregateIdentifier
 
 data class CreateRecipeCommand(
         val recipeId: String,
-        val title: String,
-        val subTitle: String,
-        val shortDescription: String,
+        val name: String,
+        val effort: String,
+        val category: String,
+        val nutrition: List<String>,
+        val preparationTime: Int,
+        val restTime: Int,
+        val ingredient: String,
         val preparation: String)
 
 data class UpdateRecipeCommand(
         @TargetAggregateIdentifier val recipeId: String,
-        val title: String,
-        val subTitle: String,
-        val shortDescription: String,
+        val name: String,
+        val effort: String,
+        val category: String,
+        val nutrition: List<String>,
+        val preparationTime: Int,
+        val restTime: Int,
+        val ingredient: String,
         val preparation: String)
 
-data class DeleteRecipeCommand(
-        @TargetAggregateIdentifier val recipeId: String)
+data class DeleteRecipeCommand(@TargetAggregateIdentifier val recipeId: String)

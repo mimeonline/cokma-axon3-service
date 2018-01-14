@@ -18,16 +18,30 @@ class RecipeEventHandler {
     @EventHandler
     fun handle(evt: RecipeCreatedEvent) {
         println(evt)
-        recipeRepository.save(RecipeViewModel(null, evt.recipeId, evt.title, evt.subTitle, evt.shortDescription, evt.preparation))
+        recipeRepository.save(RecipeViewModel(
+                null,
+                evt.recipeId,
+                evt.name,
+                evt.effort,
+                evt.category,
+                evt.nutrition,
+                evt.preparationTime,
+                evt.restTime,
+                evt.ingredient,
+                evt.preparation))
     }
 
     @EventHandler
     fun handle(evt: RecipeUpdateEvent) {
         println(evt)
         var recipe: RecipeViewModel = recipeRepository.findByRecipeId(evt.recipeId)
-        recipe.title = evt.title
-        recipe.subTitle = evt.subTitle
-        recipe.shortDescription = evt.shortDescription
+        recipe.name = evt.name
+        recipe.effort = evt.effort
+        recipe.category = evt.category
+        recipe.nutrition = evt.nutrition
+        recipe.preparationTime = evt.preparationTime
+        recipe.restTime = evt.restTime
+        recipe.ingredient = evt.ingredient
         recipe.preparation = evt.preparation
         println(recipe)
         recipeRepository.save(recipe)
