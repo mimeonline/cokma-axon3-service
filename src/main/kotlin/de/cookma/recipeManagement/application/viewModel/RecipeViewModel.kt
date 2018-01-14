@@ -1,9 +1,10 @@
 package de.cookma.recipeManagement.application.viewModel
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import org.springframework.data.mongodb.core.mapping.Document
 import javax.persistence.*
 
-
+@Document
 class RecipeViewModel(
 
         @Id
