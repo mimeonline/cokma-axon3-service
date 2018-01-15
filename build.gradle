@@ -2,7 +2,7 @@ buildscript {
     ext {
         kotlinVersion = '1.2.10'
         springBootVersion = '1.5.8.RELEASE'
-        axonFrameworkVersion = '3.1.1'
+        axonFrameworkVersion = '3.1.2'
     }
     repositories {
         mavenCentral()
@@ -54,7 +54,7 @@ dependencies {
 
 
     compile("com.h2database:h2")
-    compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '1.5.9.RELEASE'
+    // compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '1.5.9.RELEASE'
 
     // compile "org.slf4j:slf4j-simple:1.7.+"
     testCompile("junit:junit:4.12")
