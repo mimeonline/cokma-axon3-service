@@ -14,7 +14,7 @@ class RecipeViewModel(
         var name: String = "",
         var effort: String = "",
         var category: String = "",
-        var nutrition: List<String> = ArrayList(),
+        var nutrition: List<String> = listOf(),
         var preparationTime: Int = 0,
         var restTime: Int = 0,
         var ingredient: String = "",
