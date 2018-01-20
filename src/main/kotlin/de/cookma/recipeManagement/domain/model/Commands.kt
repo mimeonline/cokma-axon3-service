@@ -10,8 +10,9 @@ data class CreateRecipeCommand(
         val nutrition: List<String>,
         val preparationTime: Int,
         val restTime: Int,
-        val ingredient: String,
+        val ingredients: List<Ingredient>,
         val preparation: String)
+
 
 data class UpdateRecipeCommand(
         @TargetAggregateIdentifier val recipeId: String,
@@ -21,7 +22,7 @@ data class UpdateRecipeCommand(
         val nutrition: List<String>,
         val preparationTime: Int,
         val restTime: Int,
-        val ingredient: String,
+        val ingredients: List<Ingredient>,
         val preparation: String)
 
 data class DeleteRecipeCommand(@TargetAggregateIdentifier val recipeId: String)

@@ -1,13 +1,14 @@
 package de.cookma.recipeManagement.application.dtoModel
 
-// TODO kann bestimmt auch als data class integriert werden
-class RecipeDto(
-        var name: String,
-        var effort: String,
-        var category: String,
-        var nutrition: List<String>,
-        var preparationTime: Int,
-        var restTime: Int,
-        var ingredient: String,
-        var preparation: String
+import de.cookma.recipeManagement.domain.model.Ingredient
+
+data class RecipeDto(
+        val name: String,
+        val effort: String,
+        val category: String,
+        val nutrition: List<String>,
+        val preparationTime: Int,
+        val restTime: Int,
+        val ingredients: List<Ingredient>,
+        val preparation: String
 )

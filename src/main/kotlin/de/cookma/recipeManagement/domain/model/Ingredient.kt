@@ -1,3 +1,7 @@
 package de.cookma.recipeManagement.domain.model
 
-data class Ingredient(val name: String, val unit: Unit)
+data class Ingredient(
+        val quantity: Int,
+        val unit: String,
+        val ingredient: String
+)

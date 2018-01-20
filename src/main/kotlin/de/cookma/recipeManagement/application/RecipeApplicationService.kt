@@ -37,6 +37,7 @@ class RecipeApplicationService {
     }
 
     fun createRecipe(recipe: RecipeDto): CompletableFuture<CreateRecipeCommand> {
+        println(recipe)
         return commandGateway.send<CreateRecipeCommand>(
                 CreateRecipeCommand(
                         createRecipeId().id,
@@ -46,7 +47,7 @@ class RecipeApplicationService {
                         recipe.nutrition,
                         recipe.preparationTime,
                         recipe.restTime,
-                        recipe.ingredient,
+                        recipe.ingredients,
                         recipe.preparation))
     }
 
@@ -60,7 +61,7 @@ class RecipeApplicationService {
                         recipe.nutrition,
                         recipe.preparationTime,
                         recipe.restTime,
-                        recipe.ingredient,
+                        recipe.ingredients,
                         recipe.preparation))
     }
 

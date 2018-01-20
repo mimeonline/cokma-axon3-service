@@ -23,7 +23,7 @@ class Recipe {
     var nutrition: List<String> =  listOf()
     var preparationTime: Int = 0
     var restTime: Int = 0
-    var ingredient: String = ""
+    var ingredients: List<Ingredient> = listOf()
     //    var images: List<Image> = ArrayList() TODO Komplexer Datentyp, wie integriert man den?
     //    var ingredients: List<Ingredient> = ArrayList()
     var preparation: String = ""
@@ -42,7 +42,7 @@ class Recipe {
                         cmd.nutrition,
                         cmd.preparationTime,
                         cmd.restTime,
-                        cmd.ingredient,
+                        cmd.ingredients,
                         cmd.preparation)
         )
     }
@@ -58,7 +58,7 @@ class Recipe {
                         cmd.nutrition,
                         cmd.preparationTime,
                         cmd.restTime,
-                        cmd.ingredient,
+                        cmd.ingredients,
                         cmd.preparation))
     }
 
@@ -78,7 +78,7 @@ class Recipe {
         nutrition = evt.nutrition
         preparationTime = evt.preparationTime
         restTime = evt.restTime
-        ingredient = evt.ingredient
+        ingredients = evt.ingredients
         preparation = evt.preparation
     }
 
@@ -91,7 +91,7 @@ class Recipe {
         nutrition = evt.nutrition
         preparationTime = evt.preparationTime
         restTime = evt.restTime
-        ingredient = evt.ingredient
+        ingredients = evt.ingredients
         preparation = evt.preparation
     }
 

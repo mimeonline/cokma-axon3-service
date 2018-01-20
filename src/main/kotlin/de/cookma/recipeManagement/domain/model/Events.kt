@@ -8,7 +8,7 @@ data class RecipeCreatedEvent(
         val nutrition: List<String>,
         val preparationTime: Int,
         val restTime: Int,
-        val ingredient: String,
+        val ingredients: List<Ingredient>,
         val preparation: String)
 
 data class RecipeUpdateEvent(
@@ -19,7 +19,7 @@ data class RecipeUpdateEvent(
         val nutrition: List<String>,
         val preparationTime: Int,
         val restTime: Int,
-        val ingredient: String,
+        val ingredients: List<Ingredient>,
         val preparation: String)
 
 data class RecipeDeletedEvent(val recipeId: String)
