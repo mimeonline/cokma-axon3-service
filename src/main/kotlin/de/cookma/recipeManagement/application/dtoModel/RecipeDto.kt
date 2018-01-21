@@ -4,6 +4,7 @@ import de.cookma.recipeManagement.domain.model.Ingredient
 
 data class RecipeDto(
         val name: String,
+        val image: String,
         val effort: String,
         val category: String,
         val nutrition: List<String>,

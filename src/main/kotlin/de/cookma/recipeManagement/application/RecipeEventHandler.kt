@@ -22,6 +22,7 @@ class RecipeEventHandler {
                 null,
                 evt.recipeId,
                 evt.name,
+                "",
                 evt.effort,
                 evt.category,
                 evt.nutrition,

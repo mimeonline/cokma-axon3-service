@@ -13,6 +13,7 @@ class RecipeViewModel(
         var id: String? = null,
         var recipeId: String = "",
         var name: String = "",
+        var imageUrl: String = "",
         var effort: String = "",
         var category: String = "",
         var nutrition: List<String> = listOf(),
