@@ -2,7 +2,7 @@ package de.cookma.recipeManagement.domain.model
 
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.commandhandling.model.AggregateIdentifier
-import org.axonframework.commandhandling.model.AggregateLifecycle
+import org.axonframework.commandhandling.model.AggregateLifecycle.apply
 import org.axonframework.commandhandling.model.AggregateLifecycle.markDeleted
 import org.axonframework.eventsourcing.EventSourcingHandler
 import org.axonframework.spring.stereotype.Aggregate
@@ -31,40 +31,40 @@ class Recipe {
     @CommandHandler
     constructor(cmd: CreateRecipeCommand) {
         println(cmd)
-        AggregateLifecycle.apply(
-                RecipeCreatedEvent(
-                        cmd.recipeId,
-                        cmd.name,
-                        EvtImage(cmd.image.imageId, cmd.image.extension),
-                        cmd.effort,
-                        cmd.category,
-                        cmd.nutrition,
-                        cmd.preparationTime,
-                        cmd.restTime,
-                        cmd.ingredients,
-                        cmd.preparation)
+        apply(
+            RecipeCreatedEvent(
+                    cmd.recipeId,
+                    cmd.name,
+                    EvtImage(cmd.image.imageId, cmd.image.extension),
+                    cmd.effort,
+                    cmd.category,
+                    cmd.nutrition,
+                    cmd.preparationTime,
+                    cmd.restTime,
+                    cmd.ingredients,
+                    cmd.preparation)
         )
     }
 
     @CommandHandler
     fun handle(cmd: UpdateRecipeCommand) {
-        AggregateLifecycle.apply(
-                RecipeUpdateEvent(
-                        cmd.recipeId,
-                        cmd.name,
-                        cmd.effort,
-                        cmd.category,
-                        cmd.nutrition,
-                        cmd.preparationTime,
-                        cmd.restTime,
-                        cmd.ingredients,
-                        cmd.preparation))
+        apply(
+            RecipeUpdateEvent(
+                    cmd.recipeId,
+                    cmd.name,
+                    cmd.effort,
+                    cmd.category,
+                    cmd.nutrition,
+                    cmd.preparationTime,
+                    cmd.restTime,
+                    cmd.ingredients,
+                    cmd.preparation))
     }
 
     @CommandHandler
     fun handle(cmd: DeleteRecipeCommand) {
         println("Delete Command " + cmd)
-        AggregateLifecycle.apply(RecipeDeletedEvent(cmd.recipeId, EvtImage(image.imageId, image.extension)))
+        apply(RecipeDeletedEvent(cmd.recipeId, EvtImage(image.imageId, image.extension)))
     }
 
     @EventSourcingHandler
