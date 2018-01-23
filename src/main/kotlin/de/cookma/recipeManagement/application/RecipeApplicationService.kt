@@ -4,22 +4,22 @@ import de.cookma.recipeManagement.application.dtoModel.RecipeDto
 import de.cookma.recipeManagement.application.queryModel.RecipeFindAllQuery
 import de.cookma.recipeManagement.application.queryModel.RecipeFindQueryById
 import de.cookma.recipeManagement.application.viewModel.RecipeViewModel
-import de.cookma.recipeManagement.domain.model.CreateRecipeCommand
-import de.cookma.recipeManagement.domain.model.DeleteRecipeCommand
-import de.cookma.recipeManagement.domain.model.UpdateRecipeCommand
-import de.cookma.recipeManagement.domain.model.createRecipeId
+import de.cookma.recipeManagement.domain.model.*
 import de.cookma.recipeManagement.infrastructure.store.RecipeImageStore
 import de.cookma.recipeManagement.presentation.RecipeController
+import de.cookma.recipeManagement.utility.DataUri
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.axonframework.queryhandling.QueryGateway
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import java.util.*
 import java.util.concurrent.CompletableFuture
 
 @Service
 class RecipeApplicationService {
 
-
+    @Autowired
+    lateinit var recipeImageStore: RecipeImageStore
 
     @Autowired
     lateinit var commandGateway: CommandGateway
@@ -42,11 +42,15 @@ class RecipeApplicationService {
 
     fun createRecipe(recipe: RecipeDto): CompletableFuture<CreateRecipeCommand> {
         println(recipe)
+        val imageId = UUID.randomUUID().toString()
+        val extension = DataUri(recipe.image).extension()
+        val image = CmdImage(imageId, extension)
+        recipeImageStore.store(imageId, recipe.image)
         return   commandGateway.send<CreateRecipeCommand>(
                 CreateRecipeCommand(
                         createRecipeId().id,
                         recipe.name,
-                        recipe.image,
+                        image,
                         recipe.effort,
                         recipe.category,
                         recipe.nutrition,

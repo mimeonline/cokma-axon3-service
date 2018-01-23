@@ -10,6 +10,9 @@ import org.axonframework.eventhandling.EventHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 
+/**
+ * Das Image Extension muß aus dem dataUri ausgelesen werden
+ */
 @Component
 class RecipeEventHandler {
 
@@ -22,8 +25,7 @@ class RecipeEventHandler {
     @EventHandler
     fun handle(evt: RecipeCreatedEvent) {
         println(evt)
-        recipeImageStore.store(evt.recipeId, evt.image)
-        val imageUrl = "/images/" + evt.recipeId + ".png"
+        val imageUrl = "/images/" + evt.image.imageId + "." + evt.image.extension
         recipeRepository.save(RecipeViewModel(
                 null,
                 evt.recipeId,
@@ -57,6 +59,8 @@ class RecipeEventHandler {
     @EventHandler
     fun handle(evt: RecipeDeletedEvent) {
         recipeRepository.deleteByRecipeId(evt.recipeId)
+        var imageFile = evt.image.imageId + "." + evt.image.extension
+        recipeImageStore.deleteFile(imageFile)
     }
 
 }

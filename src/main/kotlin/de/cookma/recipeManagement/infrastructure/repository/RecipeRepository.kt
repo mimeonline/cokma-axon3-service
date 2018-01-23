@@ -1,7 +1,6 @@
 package de.cookma.recipeManagement.infrastructure.repository
 
 import de.cookma.recipeManagement.application.viewModel.RecipeViewModel
-import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.repository.query.Param
 

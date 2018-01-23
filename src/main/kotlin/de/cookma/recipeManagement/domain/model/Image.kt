@@ -1,4 +1,3 @@
 package de.cookma.recipeManagement.domain.model
 
-class Image {
-}
+class Image(var imageId: String, var extension: String)

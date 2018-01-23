@@ -3,6 +3,7 @@ buildscript {
         kotlinVersion = '1.2.20'
         springBootVersion = '1.5.9.RELEASE'
         axonFrameworkVersion = '3.1.2'
+        jacksonVerion = '2.9.3'
     }
     repositories {
         mavenCentral()
@@ -44,16 +45,18 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.springframework.boot:spring-boot-starter-data-rest")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile("org.jetbrains.kotlin:kotlin-stdlib-jre8:${kotlinVersion}")
+//    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
+    compile('io.github.microutils:kotlin-logging:1.4.8')
     compile group: 'org.axonframework', name: 'axon-core', version: "${axonFrameworkVersion}"
     compile group: 'org.axonframework', name: 'axon-spring-boot-starter', version: "${axonFrameworkVersion}"
-    compile('io.github.microutils:kotlin-logging:1.4.8')
-    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: '2.9.2'
+    compile group: 'org.axonframework', name: 'axon-mongo', version: "${axonFrameworkVersion}"
+    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: "${jacksonVerion}"
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: "${jacksonVerion}"
 
 
-    compile("com.h2database:h2")
+//    compile("com.h2database:h2")
     // compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '1.5.9.RELEASE'
 
     // compile "org.slf4j:slf4j-simple:1.7.+"

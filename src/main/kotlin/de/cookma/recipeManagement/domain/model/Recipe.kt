@@ -1,6 +1,5 @@
 package de.cookma.recipeManagement.domain.model
 
-import mu.KotlinLogging
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.commandhandling.model.AggregateIdentifier
 import org.axonframework.commandhandling.model.AggregateLifecycle
@@ -9,7 +8,7 @@ import org.axonframework.eventsourcing.EventSourcingHandler
 import org.axonframework.spring.stereotype.Aggregate
 
 // TODO Logger benutzen!
-private val logger = KotlinLogging.logger {}
+//private val logger = KotlinLogging.logger {}
 
 @Aggregate
 class Recipe {
@@ -18,15 +17,13 @@ class Recipe {
             //var recipeId: RecipeId? = null TODO Query Handler spielt noch nicht mit einem Nicht String zusammen
     var recipeId: String? = null
     var name: String = ""
-    var image: String = ""
+    var image: Image = Image("", "")
     var effort: String = ""
     var category: String = ""
-    var nutrition: List<String> =  listOf()
+    var nutrition: List<String> = listOf()
     var preparationTime: Int = 0
     var restTime: Int = 0
     var ingredients: List<Ingredient> = listOf()
-    //    var images: List<Image> = ArrayList() TODO Komplexer Datentyp, wie integriert man den?
-    //    var ingredients: List<Ingredient> = ArrayList()
     var preparation: String = ""
 
     constructor()
@@ -38,7 +35,7 @@ class Recipe {
                 RecipeCreatedEvent(
                         cmd.recipeId,
                         cmd.name,
-                        cmd.image,
+                        EvtImage(cmd.image.imageId, cmd.image.extension),
                         cmd.effort,
                         cmd.category,
                         cmd.nutrition,
@@ -67,7 +64,7 @@ class Recipe {
     @CommandHandler
     fun handle(cmd: DeleteRecipeCommand) {
         println("Delete Command " + cmd)
-        AggregateLifecycle.apply(RecipeDeletedEvent(cmd.recipeId))
+        AggregateLifecycle.apply(RecipeDeletedEvent(cmd.recipeId, EvtImage(image.imageId, image.extension)))
     }
 
     @EventSourcingHandler
@@ -75,7 +72,7 @@ class Recipe {
         println(evt)
         recipeId = evt.recipeId
         name = evt.name
-        image = evt.image
+        image = Image(evt.image.imageId, evt.image.extension)
         effort = evt.effort
         category = evt.category
         nutrition = evt.nutrition

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import org.springframework.data.mongodb.core.mapping.Document
 import javax.persistence.*
 import de.cookma.recipeManagement.domain.model.Ingredient
+import org.springframework.data.annotation.Id
 
 @Document
 class RecipeViewModel(

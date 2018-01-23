@@ -3,7 +3,7 @@ package de.cookma.recipeManagement.domain.model
 data class RecipeCreatedEvent(
         val recipeId: String,
         val name: String,
-        val image: String,
+        val image: EvtImage,
         val effort: String,
         val category: String,
         val nutrition: List<String>,
@@ -23,4 +23,6 @@ data class RecipeUpdateEvent(
         val ingredients: List<Ingredient>,
         val preparation: String)
 
-data class RecipeDeletedEvent(val recipeId: String)
+data class RecipeDeletedEvent(val recipeId: String, val image: EvtImage)
+
+data class EvtImage(val imageId: String, val extension: String)
