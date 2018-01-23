@@ -8,6 +8,7 @@ import de.cookma.recipeManagement.domain.model.CreateRecipeCommand
 import de.cookma.recipeManagement.domain.model.DeleteRecipeCommand
 import de.cookma.recipeManagement.domain.model.UpdateRecipeCommand
 import de.cookma.recipeManagement.domain.model.createRecipeId
+import de.cookma.recipeManagement.infrastructure.store.RecipeImageStore
 import de.cookma.recipeManagement.presentation.RecipeController
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.axonframework.queryhandling.QueryGateway
@@ -18,8 +19,7 @@ import java.util.concurrent.CompletableFuture
 @Service
 class RecipeApplicationService {
 
-    @Autowired
-    lateinit var recipeImageStoreService: RecipeImageStoreService
+
 
     @Autowired
     lateinit var commandGateway: CommandGateway
@@ -42,11 +42,11 @@ class RecipeApplicationService {
 
     fun createRecipe(recipe: RecipeDto): CompletableFuture<CreateRecipeCommand> {
         println(recipe)
-        recipeImageStoreService.store(RecipeController.ImageFile(recipe.image))
-        return commandGateway.send<CreateRecipeCommand>(
+        return   commandGateway.send<CreateRecipeCommand>(
                 CreateRecipeCommand(
                         createRecipeId().id,
                         recipe.name,
+                        recipe.image,
                         recipe.effort,
                         recipe.category,
                         recipe.nutrition,

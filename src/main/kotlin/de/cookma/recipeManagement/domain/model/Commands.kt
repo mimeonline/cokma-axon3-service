@@ -5,6 +5,7 @@ import org.axonframework.commandhandling.TargetAggregateIdentifier
 data class CreateRecipeCommand(
         val recipeId: String,
         val name: String,
+        val image: String,
         val effort: String,
         val category: String,
         val nutrition: List<String>,

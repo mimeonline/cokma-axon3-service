@@ -5,6 +5,7 @@ import de.cookma.recipeManagement.domain.model.RecipeCreatedEvent
 import de.cookma.recipeManagement.domain.model.RecipeDeletedEvent
 import de.cookma.recipeManagement.domain.model.RecipeUpdateEvent
 import de.cookma.recipeManagement.infrastructure.repository.RecipeRepository
+import de.cookma.recipeManagement.infrastructure.store.RecipeImageStore
 import org.axonframework.eventhandling.EventHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -15,14 +16,19 @@ class RecipeEventHandler {
     @Autowired
     lateinit var recipeRepository: RecipeRepository
 
+    @Autowired
+    lateinit var recipeImageStore: RecipeImageStore
+
     @EventHandler
     fun handle(evt: RecipeCreatedEvent) {
         println(evt)
+        recipeImageStore.store(evt.recipeId, evt.image)
+        val imageUrl = "/images/" + evt.recipeId + ".png"
         recipeRepository.save(RecipeViewModel(
                 null,
                 evt.recipeId,
                 evt.name,
-                "",
+                imageUrl,
                 evt.effort,
                 evt.category,
                 evt.nutrition,

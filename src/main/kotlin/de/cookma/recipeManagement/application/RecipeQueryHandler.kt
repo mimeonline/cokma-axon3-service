@@ -17,16 +17,12 @@ class RecipeQueryHandler {
     @QueryHandler
     fun handle(query: RecipeFindQueryById): RecipeViewModel {
         var model: RecipeViewModel = recipeRepository.findByRecipeId(query.id)
-        model.imageUrl = "/recipes/files/image.png"
         return model
     }
 
     @QueryHandler
     fun handle(query: RecipeFindAllQuery): List<RecipeViewModel> {
         var models: List<RecipeViewModel> = recipeRepository.findAll()
-        models.forEach { m -> m.imageUrl = "/recipes/files/image.png" }
         return models
-
-
     }
 }

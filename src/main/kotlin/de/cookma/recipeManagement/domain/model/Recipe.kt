@@ -18,6 +18,7 @@ class Recipe {
             //var recipeId: RecipeId? = null TODO Query Handler spielt noch nicht mit einem Nicht String zusammen
     var recipeId: String? = null
     var name: String = ""
+    var image: String = ""
     var effort: String = ""
     var category: String = ""
     var nutrition: List<String> =  listOf()
@@ -37,6 +38,7 @@ class Recipe {
                 RecipeCreatedEvent(
                         cmd.recipeId,
                         cmd.name,
+                        cmd.image,
                         cmd.effort,
                         cmd.category,
                         cmd.nutrition,
@@ -73,6 +75,7 @@ class Recipe {
         println(evt)
         recipeId = evt.recipeId
         name = evt.name
+        image = evt.image
         effort = evt.effort
         category = evt.category
         nutrition = evt.nutrition
