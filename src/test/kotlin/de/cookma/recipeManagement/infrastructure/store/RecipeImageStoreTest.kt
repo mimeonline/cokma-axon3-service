@@ -10,7 +10,7 @@ import java.nio.file.Paths
 import java.util.*
 
 /**
- * TODO
+ * TODO Image Verarbeitung
  * - Move image to resource dir in the test package
  * - Use tempDir instead of fix path in the Project root
  */

@@ -1,13 +1,24 @@
-# H2 http://localhost:8080/h2-console
-# Only for Test Purpose
+
 spring:
-#  h2:
-#    console:
-#      enabled: true
   http:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  data:
+    mongodb:
+      #uri: mongodb://user:secret@localhost:27017
+      uri: mongodb://localhost:27017
+      database: cookma
 
 server:
   port: 8090
+
+security:
+  oauth2:
+    client:
+      client-id: cookma
+      client-secret: secret
+  user:
+    name: cookma_admin
+    password: pass01wd!
+    role: ADMIN
