@@ -2,6 +2,7 @@ package de.cookma.userprofilemanagement.domain.model
 
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.commandhandling.model.AggregateIdentifier
+import org.axonframework.commandhandling.model.AggregateLifecycle
 import org.axonframework.commandhandling.model.AggregateLifecycle.apply
 import org.axonframework.eventsourcing.EventSourcingHandler
 import org.axonframework.spring.stereotype.Aggregate
@@ -20,7 +21,7 @@ class UserProfile {
 
 
     @CommandHandler
-    constructor(cmd: UserProfileCreateCommand) {
+    constructor(cmd: CreateUserProfileCommand) {
         apply(UserProfileCreatedEvent(
                 cmd.userId,
                 cmd.nickname,
@@ -28,6 +29,12 @@ class UserProfile {
                 cmd.firstname,
                 cmd.lastname
         ))
+    }
+
+    @CommandHandler
+    fun handle(cmd: DeleteUserProfileCommand) {
+        println("Delete Command " + cmd)
+        apply(UserProfileDeletedEvent(cmd.userId))
     }
 
     @EventSourcingHandler
@@ -38,5 +45,9 @@ class UserProfile {
         firstname = evt.firstname
         lastname = evt.lastname
     }
-
+    @EventSourcingHandler
+    fun on(evt: UserProfileDeletedEvent) {
+        println("Delete Event: " + evt)
+        AggregateLifecycle.markDeleted()
+    }
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
-
 @RestController
 @RequestMapping("/users")
 @CrossOrigin
@@ -17,17 +16,21 @@ class UserProfileController {
 
     @PostMapping
     @ResponseStatus(value = HttpStatus.CREATED)
-    fun registerUser(@RequestBody registerUser: RegisterUserDto) {
-        userProfileApplicationService.registerUser(registerUser)
-    }
+    fun registerUser(@RequestBody registerUser: RegisterUserDto) =
+            userProfileApplicationService.registerUser(registerUser)
+
 
     @GetMapping("/{userid}")
-    fun findUse() {
-        // do something
-    }
+    fun findUse(@PathVariable("userid") userId: String) =
+            userProfileApplicationService.findUserProfileById(userId)
+
 
     @RequestMapping
-    fun findUsers(): String {
-        return "{\"users\":[{\"firstname\":\"Richard\", \"lastname\":\"Feynman\"}," + "{\"firstname\":\"Marie\",\"lastname\":\"Curie\"}]}"
-    }
+    fun findUsers() =
+            userProfileApplicationService.findAllUserProfiles()
+
+
+    @DeleteMapping("/{id}")
+    fun deleteRecipe(@PathVariable("id") id: String) =
+            userProfileApplicationService.deleteUserProfile(id)
 }

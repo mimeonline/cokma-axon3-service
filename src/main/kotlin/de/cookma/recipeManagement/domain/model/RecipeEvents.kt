@@ -12,7 +12,7 @@ data class RecipeCreatedEvent(
         val ingredients: List<Ingredient>,
         val preparation: String)
 
-data class RecipeUpdateEvent(
+data class RecipeUpdatedEvent(
         val recipeId: String,
         val name: String,
         val effort: String,

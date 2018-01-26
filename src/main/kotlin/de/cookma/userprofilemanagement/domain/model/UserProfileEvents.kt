@@ -7,3 +7,5 @@ data class UserProfileCreatedEvent(
         val firstname: String,
         val lastname: String
 )
+
+data class UserProfileDeletedEvent(val userId: String)

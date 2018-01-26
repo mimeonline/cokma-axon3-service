@@ -3,7 +3,7 @@ package de.cookma.recipeManagement.application
 import de.cookma.recipeManagement.application.viewModel.RecipeViewModel
 import de.cookma.recipeManagement.domain.model.RecipeCreatedEvent
 import de.cookma.recipeManagement.domain.model.RecipeDeletedEvent
-import de.cookma.recipeManagement.domain.model.RecipeUpdateEvent
+import de.cookma.recipeManagement.domain.model.RecipeUpdatedEvent
 import de.cookma.recipeManagement.infrastructure.repository.RecipeRepository
 import de.cookma.recipeManagement.infrastructure.store.RecipeImageStore
 import org.axonframework.eventhandling.EventHandler
@@ -41,7 +41,7 @@ class RecipeEventHandler {
     }
 
     @EventHandler
-    fun handle(evt: RecipeUpdateEvent) {
+    fun handle(evt: RecipeUpdatedEvent) {
         println(evt)
         var recipe: RecipeViewModel = recipeRepository.findByRecipeId(evt.recipeId)
         recipe.name = evt.name

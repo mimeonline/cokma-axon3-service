@@ -5,7 +5,11 @@ import de.cookma.recipeManagement.infrastructure.store.RecipeImageStore
 import de.cookma.recipeManagement.application.dtoModel.RecipeDto
 import de.cookma.recipeManagement.application.viewModel.RecipeViewModel
 import de.cookma.recipeManagement.domain.model.CreateRecipeCommand
+import de.cookma.recipeManagement.domain.model.RecipeDeletedEvent
 import de.cookma.recipeManagement.domain.model.UpdateRecipeCommand
+import org.axonframework.commandhandling.model.AggregateLifecycle
+import org.axonframework.commandhandling.model.AggregateLifecycle.markDeleted
+import org.axonframework.eventsourcing.EventSourcingHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.io.Resource
 import org.springframework.http.HttpStatus
@@ -30,7 +34,7 @@ class RecipeController {
 
 
     @GetMapping
-    fun getRecipe(): CompletableFuture<List<*>>? {
+    fun getAllRecipe(): CompletableFuture<List<*>>? {
         return recipeApplicationService.findAllRecipe()
     }
 

@@ -49,7 +49,7 @@ class Recipe {
     @CommandHandler
     fun handle(cmd: UpdateRecipeCommand) {
         apply(
-            RecipeUpdateEvent(
+            RecipeUpdatedEvent(
                     cmd.recipeId,
                     cmd.name,
                     cmd.effort,
@@ -83,7 +83,7 @@ class Recipe {
     }
 
     @EventSourcingHandler
-    fun on(evt: RecipeUpdateEvent) {
+    fun on(evt: RecipeUpdatedEvent) {
         println(evt)
         name = evt.name
         effort = evt.effort
