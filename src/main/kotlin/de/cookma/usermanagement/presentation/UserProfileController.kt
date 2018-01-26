@@ -1,7 +1,7 @@
-package de.cookma.userprofilemanagement.presentation
+package de.cookma.usermanagement.presentation
 
-import de.cookma.userprofilemanagement.application.RegisterUserDto
-import de.cookma.userprofilemanagement.application.UserProfileApplicationService
+import de.cookma.usermanagement.application.RegisterUserDto
+import de.cookma.usermanagement.application.UserProfileApplicationService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*

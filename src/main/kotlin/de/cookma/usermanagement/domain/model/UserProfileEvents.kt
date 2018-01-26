@@ -1,4 +1,4 @@
-package de.cookma.userprofilemanagement.domain.model
+package de.cookma.usermanagement.domain.model
 
 data class UserProfileCreatedEvent(
         val userId: String,

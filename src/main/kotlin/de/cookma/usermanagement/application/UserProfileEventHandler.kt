@@ -1,8 +1,8 @@
-package de.cookma.userprofilemanagement.application
+package de.cookma.usermanagement.application
 
-import de.cookma.userprofilemanagement.domain.model.UserProfileCreatedEvent
-import de.cookma.userprofilemanagement.domain.model.UserProfileDeletedEvent
-import de.cookma.userprofilemanagement.infrastructure.repository.UserProfileRepository
+import de.cookma.usermanagement.domain.model.UserProfileCreatedEvent
+import de.cookma.usermanagement.domain.model.UserProfileDeletedEvent
+import de.cookma.usermanagement.infrastructure.repository.UserProfileRepository
 import org.axonframework.eventhandling.EventHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component

@@ -1,6 +1,6 @@
-package de.cookma.userprofilemanagement.infrastructure.repository
+package de.cookma.usermanagement.infrastructure.repository
 
-import de.cookma.userprofilemanagement.application.UserProfileViewModel
+import de.cookma.usermanagement.application.UserProfileViewModel
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.repository.query.Param
 

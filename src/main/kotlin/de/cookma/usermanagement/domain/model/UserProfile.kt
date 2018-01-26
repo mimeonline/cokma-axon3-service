@@ -1,4 +1,4 @@
-package de.cookma.userprofilemanagement.domain.model
+package de.cookma.usermanagement.domain.model
 
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.commandhandling.model.AggregateIdentifier

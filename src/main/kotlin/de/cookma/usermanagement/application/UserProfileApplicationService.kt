@@ -1,10 +1,10 @@
-package de.cookma.userprofilemanagement.application
+package de.cookma.usermanagement.application
 
 import de.cookma.recipeManagement.domain.model.DeleteRecipeCommand
 import de.cookma.authservice.application.UserApplicationService
 import de.cookma.authservice.application.UserDto
-import de.cookma.userprofilemanagement.domain.model.CreateUserProfileCommand
-import de.cookma.userprofilemanagement.domain.model.DeleteUserProfileCommand
+import de.cookma.usermanagement.domain.model.CreateUserProfileCommand
+import de.cookma.usermanagement.domain.model.DeleteUserProfileCommand
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.axonframework.queryhandling.QueryGateway
 import org.springframework.beans.factory.annotation.Autowired

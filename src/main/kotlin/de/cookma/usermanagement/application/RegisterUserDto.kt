@@ -1,4 +1,4 @@
-package de.cookma.userprofilemanagement.application
+package de.cookma.usermanagement.application
 
 data class RegisterUserDto(
         val username: String,

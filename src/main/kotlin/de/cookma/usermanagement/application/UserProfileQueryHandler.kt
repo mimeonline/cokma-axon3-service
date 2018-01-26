@@ -1,6 +1,6 @@
-package de.cookma.userprofilemanagement.application
+package de.cookma.usermanagement.application
 
-import de.cookma.userprofilemanagement.infrastructure.repository.UserProfileRepository
+import de.cookma.usermanagement.infrastructure.repository.UserProfileRepository
 import org.axonframework.queryhandling.QueryHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
