@@ -14,7 +14,7 @@ class UserProfileController {
     @Autowired
     lateinit var userProfileApplicationService: UserProfileApplicationService
 
-    @PostMapping
+    @PostMapping("/register")
     @ResponseStatus(value = HttpStatus.CREATED)
     fun registerUser(@RequestBody registerUser: RegisterUserDto) =
             userProfileApplicationService.registerUser(registerUser)

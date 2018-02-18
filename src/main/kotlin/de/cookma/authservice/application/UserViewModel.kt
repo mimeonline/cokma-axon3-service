@@ -1,6 +1,7 @@
 package de.cookma.authservice.application
 
 import org.springframework.data.mongodb.core.mapping.Document
+import org.springframework.security.core.userdetails.UserDetails
 
 @Document
 class UserViewModel(

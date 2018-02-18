@@ -26,10 +26,12 @@ class UserProfileApplicationService {
 
     /**
      * TODO Email muß unique sein
+     * - An dieser Stelle die Email Unique Prüfung auf dem View Model durchführen
+     * - Das authservice Modul soll ein JWT Token zurück geben
      */
     fun registerUser(dto: RegisterUserDto): CompletableFuture<CreateUserProfileCommand> {
         val userId = UUID.randomUUID().toString()
-        userApplication.saveUser(UserDto(userId, dto.username, dto.password))
+        userApplication.saveUser(UserDto(userId, dto.email, dto.password))
         return commandGateway.send<CreateUserProfileCommand>(CreateUserProfileCommand(
                 userId,
                 dto.nickname,

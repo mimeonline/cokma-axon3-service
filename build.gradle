@@ -42,23 +42,34 @@ repositories {
 }
 
 dependencies {
+    // Spring
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.springframework.boot:spring-boot-starter-data-rest")
     compile("org.springframework.boot:spring-boot-starter-data-mongodb")
-//    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-security")
 //    compile group: 'org.springframework.security.oauth', name: 'spring-security-oauth2', version: '2.2.1.RELEASE'
+
+    // Kotlin
     compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     compile('io.github.microutils:kotlin-logging:1.4.8')
+
+    // Axon Framework
     compile group: 'org.axonframework', name: 'axon-core', version: "${axonFrameworkVersion}"
     compile group: 'org.axonframework', name: 'axon-spring-boot-starter', version: "${axonFrameworkVersion}"
     compile group: 'org.axonframework', name: 'axon-mongo', version: "${axonFrameworkVersion}"
+
+    // Jackson
     compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-kotlin', version: "${jacksonVerion}"
     compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: "${jacksonVerion}"
 
+    // Stuff
+//    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.0'
+
     // compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '1.5.9.RELEASE'
 
-    // compile "org.slf4j:slf4j-simple:1.7.+"
+
     testCompile("junit:junit:4.12")
     testCompile group: 'org.axonframework', name: 'axon-test', version: "${axonFrameworkVersion}"
     testCompile(group: 'org.axonframework', name: 'axon-spring', version: "${axonFrameworkVersion}")

@@ -8,4 +8,5 @@ interface UserRepository : MongoRepository<UserViewModel, Long> {
 
     fun findByUserId(@Param("userId") userId: String): UserViewModel
     fun findByUserProfileId(@Param("userProfileId") userProfileId: String): UserViewModel
+    fun findByUsername(@Param("username") username: String): UserViewModel
 }
