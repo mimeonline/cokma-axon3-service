@@ -55,5 +55,6 @@ open class JWTAuthenticationFilter(private val authManager: AuthenticationManage
                 .signWith(SignatureAlgorithm.HS512, SECRET.toByteArray())
                 .compact()
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + token)
+        response.addHeader("Access-Control-Expose-Headers", "Authorization")
     }
 }

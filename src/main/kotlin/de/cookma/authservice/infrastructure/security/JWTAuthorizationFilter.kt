@@ -24,6 +24,7 @@ class JWTAuthorizationFilter(authenticationManager: AuthenticationManager) : Bas
                                   response: HttpServletResponse,
                                   chain: FilterChain) {
         val header = request.getHeader(HEADER_STRING)
+        val headers = request.headerNames
 
         if (header == null || !header.startsWith(TOKEN_PREFIX)) {
             chain.doFilter(request, response)
@@ -40,7 +41,7 @@ class JWTAuthorizationFilter(authenticationManager: AuthenticationManager) : Bas
         val token = request.getHeader(HEADER_STRING)
         if (token != null) {
             // parse the token.
-            logger.info { "Secret: " + SECRET.toByteArray() }
+
             val user = Jwts.parser()
                     .setSigningKey(SECRET.toByteArray())
                     .parseClaimsJws(token!!.replace(TOKEN_PREFIX, ""))
