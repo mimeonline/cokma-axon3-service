@@ -18,7 +18,7 @@ class UserProfileEventHandler {
         userProfileRepository.save(UserProfileViewModel(
                 evt.userId,
                 evt.email,
-                evt.nickname,
+                evt.username,
                 evt.firstname,
                 evt.lastname
         ))

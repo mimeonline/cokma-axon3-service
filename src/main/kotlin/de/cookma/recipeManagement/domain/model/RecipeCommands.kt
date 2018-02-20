@@ -4,6 +4,7 @@ import org.axonframework.commandhandling.TargetAggregateIdentifier
 
 data class CreateRecipeCommand(
         val recipeId: String,
+        val userProfileId: String,
         val name: String,
         val image: CmdImage,
         val effort: String,

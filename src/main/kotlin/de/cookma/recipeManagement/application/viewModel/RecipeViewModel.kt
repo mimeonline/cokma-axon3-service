@@ -1,10 +1,10 @@
 package de.cookma.recipeManagement.application.viewModel
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import org.springframework.data.mongodb.core.mapping.Document
-import javax.persistence.*
 import de.cookma.recipeManagement.domain.model.Ingredient
 import org.springframework.data.annotation.Id
+import org.springframework.data.mongodb.core.mapping.Document
+import java.time.LocalDateTime
 
 @Document
 class RecipeViewModel(
@@ -13,6 +13,9 @@ class RecipeViewModel(
         @JsonIgnore
         var id: String? = null,
         var recipeId: String = "",
+        var lastModificationDate: LocalDateTime? = null,
+        var userProfileId: String = "",
+        var username: String = "",
         var name: String = "",
         var imageUrl: String = "",
         var effort: String = "",

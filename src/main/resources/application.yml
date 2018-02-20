@@ -9,6 +9,9 @@ spring:
       #uri: mongodb://user:secret@localhost:27017
       uri: mongodb://localhost:27017
       database: cookma
+  jackson:
+      serialization:
+        write-dates-as-timestamps: false
 
 server:
   port: 8090

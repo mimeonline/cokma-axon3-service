@@ -34,7 +34,7 @@ class UserProfileApplicationService {
         userApplication.saveUser(UserDto(userId, dto.email, dto.password))
         return commandGateway.send<CreateUserProfileCommand>(CreateUserProfileCommand(
                 userId,
-                dto.nickname,
+                dto.username,
                 dto.email,
                 dto.firstname,
                 dto.lastname

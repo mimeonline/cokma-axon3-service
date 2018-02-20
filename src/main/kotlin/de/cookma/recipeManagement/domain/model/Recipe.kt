@@ -6,6 +6,7 @@ import org.axonframework.commandhandling.model.AggregateLifecycle.apply
 import org.axonframework.commandhandling.model.AggregateLifecycle.markDeleted
 import org.axonframework.eventsourcing.EventSourcingHandler
 import org.axonframework.spring.stereotype.Aggregate
+import java.time.LocalDateTime
 
 // TODO Logger benutzen!
 //private val logger = KotlinLogging.logger {}
@@ -16,6 +17,8 @@ class Recipe {
     @AggregateIdentifier
             //var recipeId: RecipeId? = null TODO Query Handler spielt noch nicht mit einem Nicht String zusammen
     var recipeId: String? = null
+    var creationDate: LocalDateTime? = null
+    var userProfileId = ""
     var name: String = ""
     var image: Image = Image("", "")
     var effort: String = ""
@@ -34,6 +37,8 @@ class Recipe {
         apply(
             RecipeCreatedEvent(
                     cmd.recipeId,
+                    LocalDateTime.now(),
+                    cmd.userProfileId,
                     cmd.name,
                     EvtImage(cmd.image.imageId, cmd.image.extension),
                     cmd.effort,
@@ -71,6 +76,7 @@ class Recipe {
     fun on(evt: RecipeCreatedEvent) {
         println(evt)
         recipeId = evt.recipeId
+        userProfileId = evt.userProfileId
         name = evt.name
         image = Image(evt.image.imageId, evt.image.extension)
         effort = evt.effort

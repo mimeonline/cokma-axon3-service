@@ -12,7 +12,7 @@ class UserProfile {
 
     @AggregateIdentifier
     var userId: String? = null
-    var nickname: String = ""
+    var username: String = ""
     var email: String = ""
     var firstname: String = ""
     var lastname: String = ""
@@ -24,7 +24,7 @@ class UserProfile {
     constructor(cmd: CreateUserProfileCommand) {
         apply(UserProfileCreatedEvent(
                 cmd.userId,
-                cmd.nickname,
+                cmd.username,
                 cmd.email,
                 cmd.firstname,
                 cmd.lastname
@@ -40,7 +40,7 @@ class UserProfile {
     @EventSourcingHandler
     fun on(evt: UserProfileCreatedEvent) {
         userId = evt.userId
-        nickname = evt.nickname
+        username = evt.username
         email = evt.email
         firstname = evt.firstname
         lastname = evt.lastname

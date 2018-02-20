@@ -1,7 +1,11 @@
 package de.cookma.recipeManagement.domain.model
 
+import java.time.LocalDateTime
+
 data class RecipeCreatedEvent(
         val recipeId: String,
+        val creationDate: LocalDateTime,
+        val userProfileId: String,
         val name: String,
         val image: EvtImage,
         val effort: String,

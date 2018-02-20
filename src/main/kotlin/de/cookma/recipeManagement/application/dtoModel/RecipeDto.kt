@@ -11,5 +11,6 @@ data class RecipeDto(
         val preparationTime: Int,
         val restTime: Int,
         val ingredients: List<Ingredient>,
-        val preparation: String
+        val preparation: String,
+        val user: String
 )

@@ -3,7 +3,7 @@ buildscript {
         kotlinVersion = '1.2.21'
         springBootVersion = '1.5.9.RELEASE'
         axonFrameworkVersion = '3.1.2'
-        jacksonVerion = '2.9.3'
+        jacksonVerion = '2.9.4'
     }
     repositories {
         mavenCentral()

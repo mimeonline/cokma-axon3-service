@@ -8,6 +8,7 @@ import de.cookma.recipeManagement.domain.model.*
 import de.cookma.recipeManagement.infrastructure.store.RecipeImageStore
 import de.cookma.recipeManagement.presentation.RecipeController
 import de.cookma.recipeManagement.utility.DataUri
+import de.cookma.usermanagement.infrastructure.repository.UserProfileRepository
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.axonframework.queryhandling.QueryGateway
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,6 +21,9 @@ class RecipeApplicationService {
 
     @Autowired
     lateinit var recipeImageStore: RecipeImageStore
+
+    @Autowired
+    lateinit var userProfileRepository: UserProfileRepository
 
     @Autowired
     lateinit var commandGateway: CommandGateway
@@ -46,9 +50,13 @@ class RecipeApplicationService {
         val extension = DataUri(recipe.image).extension()
         val image = CmdImage(imageId, extension)
         recipeImageStore.store(imageId, recipe.image)
+
+        val userProfile = userProfileRepository.findByEmail(recipe.user)
+
         return   commandGateway.send<CreateRecipeCommand>(
                 CreateRecipeCommand(
                         createRecipeId().id,
+                        userProfile.userId,
                         recipe.name,
                         image,
                         recipe.effort,
