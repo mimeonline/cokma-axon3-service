@@ -6,12 +6,14 @@ import org.axonframework.commandhandling.model.AggregateLifecycle
 import org.axonframework.commandhandling.model.AggregateLifecycle.apply
 import org.axonframework.eventsourcing.EventSourcingHandler
 import org.axonframework.spring.stereotype.Aggregate
+import java.time.LocalDateTime
 
 @Aggregate
 class UserProfile {
 
     @AggregateIdentifier
     var userId: String? = null
+    var creationDate: LocalDateTime? = null
     var username: String = ""
     var email: String = ""
     var firstname: String = ""
@@ -24,6 +26,7 @@ class UserProfile {
     constructor(cmd: CreateUserProfileCommand) {
         apply(UserProfileCreatedEvent(
                 cmd.userId,
+                LocalDateTime.now(),
                 cmd.username,
                 cmd.email,
                 cmd.firstname,
