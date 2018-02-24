@@ -3,6 +3,7 @@ package io.cookma.recipeManagement.infrastructure.config
 import com.mongodb.MongoClient
 import org.axonframework.mongo.DefaultMongoTemplate
 import org.axonframework.mongo.eventsourcing.eventstore.MongoEventStorageEngine
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import java.net.UnknownHostException
@@ -10,6 +11,14 @@ import java.net.UnknownHostException
 
 @Configuration
 class AxomConfiguration {
+
+    @Value("\${mongodb.host.name}")
+    private val mongodbHost: String? = null
+
+    @Value("\${mongodb.host.port}")
+    private val mongoDBPort: Int = 0
+
+
 
 //    @Bean
 //    fun axonJsonSerializer(): Serializer {
@@ -33,7 +42,7 @@ class AxomConfiguration {
     @Bean
     @Throws(UnknownHostException::class)
     fun mongoClient(): MongoClient {
-        return MongoClient("127.0.0.1", 27017)
+        return MongoClient(mongodbHost, mongoDBPort)
     }
 
 //    @Bean(name = arrayOf("axonMongoTemplate"))

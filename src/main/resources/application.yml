@@ -26,3 +26,8 @@ security:
     name: cookma_admin
     password: pass01wd!
     role: ADMIN
+
+mongodb:
+  host:
+    name: mongodb
+    port: 27017

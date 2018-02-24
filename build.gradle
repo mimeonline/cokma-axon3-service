@@ -88,7 +88,7 @@ dependencies {
 
 
 docker {
-    name "${project.group}/${jar.baseName}:${project.version }"
+    name "${project.group}/${jar.baseName}:${project.version}"
     tags 'latest'
     files jar.archivePath
     dockerfile file('src/main/docker/Dockerfile')
