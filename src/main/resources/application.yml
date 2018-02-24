@@ -7,7 +7,8 @@ spring:
   data:
     mongodb:
       #uri: mongodb://user:secret@localhost:27017
-      uri: mongodb://localhost:27017
+#      uri: mongodb://localhost:27017
+      uri: mongodb://mongodb:27017
       database: cookma
   jackson:
       serialization:
