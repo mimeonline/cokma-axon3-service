@@ -17,6 +17,7 @@ buildscript {
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
         classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
         classpath "gradle.plugin.com.palantir.gradle.docker:gradle-docker:$dockerPluginVer"
+        classpath "pl.allegro.tech.build:axion-release-plugin:1.9.0"
     }
 }
 
@@ -25,9 +26,12 @@ apply plugin: 'kotlin-spring'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: "com.palantir.docker"
+apply plugin: "pl.allegro.tech.build.axion-release"
 
-group = 'io.cookma'
-version = '0.0.1-SNAPSHOT'
+
+
+project.group = 'io.cookma'
+project.version = scmVersion.version
 sourceCompatibility = 1.8
 
 jar {
@@ -84,7 +88,7 @@ dependencies {
 
 
 docker {
-    name "${project.group}/${jar.baseName}:${jar.version}"
+    name "${project.group}/${jar.baseName}:${project.version }"
     tags 'latest'
     files jar.archivePath
     dockerfile file('src/main/docker/Dockerfile')
