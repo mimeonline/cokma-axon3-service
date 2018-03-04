@@ -2,10 +2,16 @@ package io.cookma.recipeManagement.presentation
 
 import io.cookma.recipeManagement.application.RecipeApplicationService
 import io.cookma.recipeManagement.application.dtoModel.RecipeDto
+import io.cookma.recipeManagement.application.dtoModel.RecipeEditDto
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import java.util.concurrent.CompletableFuture
+import javax.servlet.http.HttpServletResponse
+import org.springframework.web.bind.annotation.RequestMethod
+import org.springframework.web.bind.annotation.RequestMapping
+
+
 
 
 @RestController
@@ -33,12 +39,11 @@ class RecipeController {
 
     @PutMapping("/{id}")
     fun updateRecipe(
-            @RequestBody recipe: RecipeDto,
+            @RequestBody recipe: RecipeEditDto,
             @PathVariable("id") id: String) = recipeApplicationService.updateRecipe(id, recipe)
 
 
     @DeleteMapping("/{id}")
     fun deleteRecipe(@PathVariable("id") id: String) = recipeApplicationService.deleteRecipe(id)
-
 
 }

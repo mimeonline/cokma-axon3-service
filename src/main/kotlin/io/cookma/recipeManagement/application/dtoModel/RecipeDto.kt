@@ -14,3 +14,15 @@ data class RecipeDto(
         val preparation: String,
         val user: String
 )
+
+data class RecipeEditDto(
+        val name: String,
+        val effort: String,
+        val category: String,
+        val nutrition: List<String>,
+        val preparationTime: Int,
+        val restTime: Int,
+        val ingredients: List<Ingredient>,
+        val preparation: String,
+        val user: String
+)

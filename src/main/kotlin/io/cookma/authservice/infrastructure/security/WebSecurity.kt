@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.CorsConfigurationSource
+import java.util.*
 import javax.servlet.http.HttpServletRequest
 
 
@@ -28,7 +29,13 @@ class WebSecurity(
         http
                 .cors().configurationSource(object : CorsConfigurationSource {
                    override fun getCorsConfiguration(request: HttpServletRequest): CorsConfiguration {
-                        return CorsConfiguration().applyPermitDefaultValues()
+                       var corsConfiguration = CorsConfiguration()
+                       corsConfiguration.addAllowedOrigin(CorsConfiguration.ALL)
+                       corsConfiguration.setAllowedMethods(Arrays.asList("GET", "HEAD", "POST", "DELETE", "PUT","OPTION"))
+                       corsConfiguration.addAllowedHeader(CorsConfiguration.ALL)
+                       corsConfiguration.setAllowCredentials(true)
+                       corsConfiguration.setMaxAge(1800L)
+                        return corsConfiguration
                     }
                 })
                 .and().csrf().disable().authorizeRequests()

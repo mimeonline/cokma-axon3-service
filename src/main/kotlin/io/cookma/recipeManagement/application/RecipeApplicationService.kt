@@ -1,6 +1,7 @@
 package io.cookma.recipeManagement.application
 
 import io.cookma.recipeManagement.application.dtoModel.RecipeDto
+import io.cookma.recipeManagement.application.dtoModel.RecipeEditDto
 import io.cookma.recipeManagement.application.queryModel.RecipeFindAllQuery
 import io.cookma.recipeManagement.application.queryModel.RecipeFindQueryById
 import io.cookma.recipeManagement.application.viewModel.RecipeViewModel
@@ -45,10 +46,7 @@ class RecipeApplicationService {
 
     fun createRecipe(recipe: RecipeDto): CompletableFuture<CreateRecipeCommand> {
         println(recipe)
-        val imageId = UUID.randomUUID().toString()
-        val extension = DataUri(recipe.image).extension()
-        val image = CmdImage(imageId, extension)
-        recipeImageStore.store(imageId, recipe.image)
+        val image = storeImage(recipe)
 
         val userProfile = userProfileRepository.findByEmail(recipe.user)
 
@@ -67,7 +65,15 @@ class RecipeApplicationService {
                         recipe.preparation))
     }
 
-    fun updateRecipe(id: String, recipe: RecipeDto): CompletableFuture<UpdateRecipeCommand> {
+    private fun storeImage(recipe: RecipeDto): CmdImage {
+        val imageId = UUID.randomUUID().toString()
+        val extension = DataUri(recipe.image).extension()
+        val image = CmdImage(imageId, extension)
+        recipeImageStore.store(imageId, recipe.image)
+        return image
+    }
+
+    fun updateRecipe(id: String, recipe: RecipeEditDto): CompletableFuture<UpdateRecipeCommand> {
         return commandGateway.send<UpdateRecipeCommand>(
                 UpdateRecipeCommand(
                         id,
@@ -82,6 +88,7 @@ class RecipeApplicationService {
     }
 
     fun deleteRecipe(id: String) {
+        println("Delete Recipe with ID:" + id)
         commandGateway.send<DeleteRecipeCommand>(DeleteRecipeCommand(id))
     }
 }
