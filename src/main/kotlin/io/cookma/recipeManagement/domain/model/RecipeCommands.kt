@@ -13,7 +13,7 @@ data class CreateRecipeCommand(
         val preparationTime: Int,
         val restTime: Int,
         val ingredients: List<Ingredient>,
-        val preparation: String)
+        val preparations: List<Preparation>)
 
 data class CmdImage(val imageId: String, val extension: String)
 
@@ -27,6 +27,6 @@ data class UpdateRecipeCommand(
         val preparationTime: Int,
         val restTime: Int,
         val ingredients: List<Ingredient>,
-        val preparation: String)
+        val preparations: List<Preparation>)
 
 data class DeleteRecipeCommand(@TargetAggregateIdentifier val recipeId: String)

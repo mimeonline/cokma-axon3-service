@@ -62,7 +62,7 @@ class RecipeApplicationService {
                         recipe.preparationTime,
                         recipe.restTime,
                         recipe.ingredients,
-                        recipe.preparation))
+                        recipe.preparations))
     }
 
     private fun storeImage(recipe: RecipeDto): CmdImage {
@@ -84,7 +84,7 @@ class RecipeApplicationService {
                         recipe.preparationTime,
                         recipe.restTime,
                         recipe.ingredients,
-                        recipe.preparation))
+                        recipe.preparations))
     }
 
     fun deleteRecipe(id: String) {

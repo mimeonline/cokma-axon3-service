@@ -27,7 +27,7 @@ class Recipe {
     var preparationTime: Int = 0
     var restTime: Int = 0
     var ingredients: List<Ingredient> = listOf()
-    var preparation: String = ""
+    var preparations: List<Preparation> = listOf()
 
     constructor()
 
@@ -47,7 +47,7 @@ class Recipe {
                     cmd.preparationTime,
                     cmd.restTime,
                     cmd.ingredients,
-                    cmd.preparation)
+                    cmd.preparations)
         )
     }
 
@@ -63,7 +63,7 @@ class Recipe {
                     cmd.preparationTime,
                     cmd.restTime,
                     cmd.ingredients,
-                    cmd.preparation))
+                    cmd.preparations))
     }
 
     @CommandHandler
@@ -85,7 +85,7 @@ class Recipe {
         preparationTime = evt.preparationTime
         restTime = evt.restTime
         ingredients = evt.ingredients
-        preparation = evt.preparation
+        preparations = evt.preparations
     }
 
     @EventSourcingHandler
@@ -98,7 +98,7 @@ class Recipe {
         preparationTime = evt.preparationTime
         restTime = evt.restTime
         ingredients = evt.ingredients
-        preparation = evt.preparation
+        preparations = evt.preparations
     }
 
     @EventSourcingHandler

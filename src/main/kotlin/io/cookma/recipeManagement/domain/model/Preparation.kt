@@ -1,4 +1,5 @@
 package io.cookma.recipeManagement.domain.model
 
-class Preparation {
-}
+data class Preparation (
+    val preparationStep: String
+)

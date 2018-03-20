@@ -2,6 +2,7 @@ package io.cookma.recipeManagement.application.viewModel
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import io.cookma.recipeManagement.domain.model.Ingredient
+import io.cookma.recipeManagement.domain.model.Preparation
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDateTime
@@ -24,6 +25,6 @@ class RecipeViewModel(
         var preparationTime: Int = 0,
         var restTime: Int = 0,
         var ingredients: List<Ingredient> = listOf(),
-        var preparation: String = "") {
+        var preparations: List<Preparation> = listOf()) {
 
 }

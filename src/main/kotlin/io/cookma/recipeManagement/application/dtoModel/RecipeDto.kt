@@ -1,6 +1,7 @@
 package io.cookma.recipeManagement.application.dtoModel
 
 import io.cookma.recipeManagement.domain.model.Ingredient
+import io.cookma.recipeManagement.domain.model.Preparation
 
 data class RecipeDto(
         val name: String,
@@ -11,7 +12,7 @@ data class RecipeDto(
         val preparationTime: Int,
         val restTime: Int,
         val ingredients: List<Ingredient>,
-        val preparation: String,
+        val preparations: List<Preparation>,
         val user: String
 )
 
@@ -23,6 +24,6 @@ data class RecipeEditDto(
         val preparationTime: Int,
         val restTime: Int,
         val ingredients: List<Ingredient>,
-        val preparation: String,
+        val preparations: List<Preparation>,
         val user: String
 )
