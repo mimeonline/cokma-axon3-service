@@ -22,7 +22,7 @@ class RecipeQueryHandler {
 
     @QueryHandler
     fun handle(query: RecipeFindAllQuery): List<RecipeViewModel> {
-        var models: List<RecipeViewModel> = recipeRepository.findAll()
+        var models: List<RecipeViewModel> = recipeRepository.findAllByOrderByLastModificationDateDesc()
         return models
     }
 }
