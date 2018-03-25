@@ -19,16 +19,13 @@ class UserProfileController {
     fun registerUser(@RequestBody registerUser: RegisterUserDto) =
             userProfileApplicationService.registerUser(registerUser)
 
-
     @GetMapping("/{userid}")
-    fun findUse(@PathVariable("userid") userId: String) =
+    fun findUserByUserId(@PathVariable("userid") userId: String) =
             userProfileApplicationService.findUserProfileById(userId)
-
 
     @RequestMapping
     fun findUsers() =
             userProfileApplicationService.findAllUserProfiles()
-
 
     @DeleteMapping("/{id}")
     fun deleteRecipe(@PathVariable("id") id: String) =

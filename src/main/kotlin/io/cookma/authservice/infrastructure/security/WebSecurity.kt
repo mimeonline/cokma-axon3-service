@@ -1,6 +1,8 @@
 package io.cookma.authservice.infrastructure.security
 
+import io.cookma.authservice.infrastructure.UserRepository
 import io.cookma.authservice.infrastructure.security.SecurityConstants.SIGN_UP_URL
+import io.cookma.usermanagement.infrastructure.repository.UserProfileRepository
 import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -18,7 +20,8 @@ import javax.servlet.http.HttpServletRequest
 @EnableWebSecurity
 class WebSecurity(
         private val userDetailsService: UserDetailsService,
-        private val bCryptPasswordEncoder: BCryptPasswordEncoder
+        private val bCryptPasswordEncoder: BCryptPasswordEncoder,
+        private val userProfileRepository: UserProfileRepository
 ) : WebSecurityConfigurerAdapter() {
 
 
@@ -44,7 +47,7 @@ class WebSecurity(
                 .antMatchers(HttpMethod.GET, "/recipes").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(JWTAuthenticationFilter(authenticationManager()))
+                .addFilter(JWTAuthenticationFilter(authenticationManager(),userProfileRepository))
                 .addFilter(JWTAuthorizationFilter(authenticationManager()))
                 // this disables session creation on Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

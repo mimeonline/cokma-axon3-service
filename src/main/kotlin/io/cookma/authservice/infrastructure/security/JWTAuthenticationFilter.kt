@@ -1,11 +1,14 @@
 package io.cookma.authservice.infrastructure.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.cookma.authservice.application.UserViewModel
+import io.cookma.authservice.infrastructure.UserRepository
 import io.cookma.authservice.infrastructure.security.SecurityConstants.EXPIRATION_TIME
 import io.cookma.authservice.infrastructure.security.SecurityConstants.HEADER_STRING
 import io.cookma.authservice.infrastructure.security.SecurityConstants.SECRET
 import io.cookma.authservice.infrastructure.security.SecurityConstants.TOKEN_PREFIX
+import io.cookma.usermanagement.infrastructure.repository.UserProfileRepository
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.security.authentication.AuthenticationManager
@@ -23,7 +26,7 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 
-open class JWTAuthenticationFilter(private val authManager: AuthenticationManager) : UsernamePasswordAuthenticationFilter() {
+open class JWTAuthenticationFilter(private val authManager: AuthenticationManager, private val userProfileRepository: UserProfileRepository) : UsernamePasswordAuthenticationFilter() {
 
     @Throws(AuthenticationException::class)
     override fun attemptAuthentication(request: HttpServletRequest,
@@ -56,5 +59,12 @@ open class JWTAuthenticationFilter(private val authManager: AuthenticationManage
                 .compact()
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + token)
         response.addHeader("Access-Control-Expose-Headers", "Authorization")
+        addUserProfileToBody(authentication, response)
+    }
+
+    private fun addUserProfileToBody(authentication: Authentication, response: HttpServletResponse) {
+        var user = userProfileRepository.findByEmail((authentication.principal as User).username)
+        val mapper = jacksonObjectMapper()
+        response.writer.write(mapper.writeValueAsString(user))
     }
 }
