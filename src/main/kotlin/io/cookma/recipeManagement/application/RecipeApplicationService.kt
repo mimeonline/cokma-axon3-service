@@ -48,12 +48,10 @@ class RecipeApplicationService {
         println(recipe)
         val image = storeImage(recipe)
 
-        val userProfile = userProfileRepository.findByEmail(recipe.user)
-
         return   commandGateway.send<CreateRecipeCommand>(
                 CreateRecipeCommand(
                         createRecipeId().id,
-                        userProfile.userId,
+                        recipe.userId,
                         recipe.name,
                         image,
                         recipe.effort,

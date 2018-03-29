@@ -3,7 +3,6 @@ package io.cookma.authservice.infrastructure.security
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.cookma.authservice.application.UserViewModel
-import io.cookma.authservice.infrastructure.UserRepository
 import io.cookma.authservice.infrastructure.security.SecurityConstants.EXPIRATION_TIME
 import io.cookma.authservice.infrastructure.security.SecurityConstants.HEADER_STRING
 import io.cookma.authservice.infrastructure.security.SecurityConstants.SECRET
