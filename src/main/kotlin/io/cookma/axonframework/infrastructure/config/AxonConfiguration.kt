@@ -1,5 +1,6 @@
 package io.cookma.axonframework.infrastructure.config
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.mongodb.MongoClient
 import io.cookma.recipeManagement.infrastructure.config.upcast.RecipeCreateOrUpdatedEventUpcaster
 import org.axonframework.config.EventHandlingConfiguration
@@ -10,12 +11,15 @@ import org.axonframework.mongo.eventsourcing.eventstore.MongoEventStorageEngine
 import org.axonframework.mongo.eventsourcing.eventstore.documentperevent.DocumentPerEventStorageStrategy
 import org.axonframework.mongo.eventsourcing.tokenstore.MongoTokenStore
 import org.axonframework.serialization.Serializer
+import org.axonframework.serialization.json.JacksonSerializer
 import org.axonframework.serialization.upcasting.event.EventUpcaster
 import org.axonframework.serialization.upcasting.event.EventUpcasterChain
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.context.annotation.Primary
 import java.net.UnknownHostException
 
 
@@ -29,14 +33,13 @@ class AxonConfiguration {
     private val mongoDBPort: Int = 0
 
     @Autowired
-    lateinit var eventSerializer: Serializer
+    lateinit var axonXmlSerializer: Serializer
 
-    //    @Bean
-//    fun axonJsonSerializer(): Serializer {
-//        val objectMapper = ObjectMapper()
-//        objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-//        return JacksonSerializer(objectMapper)
-//    }
+    @Bean
+    @Qualifier("eventSerializer")
+    fun axonJsonSerializer(): Serializer {
+        return JacksonSerializer(jacksonObjectMapper())
+    }
 
     @Autowired
     fun configureProcessors(eventHandlingConfiguration: EventHandlingConfiguration) {
@@ -45,14 +48,14 @@ class AxonConfiguration {
 
     @Bean
     fun getMongoTokenStore(): TokenStore {
-        return MongoTokenStore(axonMongoTemplate(), eventSerializer)
+        return MongoTokenStore(axonMongoTemplate(), axonXmlSerializer)
     }
 
 
     @Bean
     fun eventStorageEngine(): MongoEventStorageEngine {
         return MongoEventStorageEngine(
-                eventSerializer, upcasterChain(), axonMongoTemplate(), DocumentPerEventStorageStrategy())
+                axonJsonSerializer(), upcasterChain(), axonMongoTemplate(), DocumentPerEventStorageStrategy())
     }
 
     @Bean
@@ -62,7 +65,6 @@ class AxonConfiguration {
     fun axonMongoTemplate(): MongoTemplate {
         return DefaultMongoTemplate(mongoClient())
     }
-
 
 
     @Bean

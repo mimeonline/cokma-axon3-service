@@ -1,5 +1,6 @@
 package io.cookma.recipeManagement.domain.model
 
+import mu.KLogging
 import org.axonframework.commandhandling.CommandHandler
 import org.axonframework.commandhandling.model.AggregateIdentifier
 import org.axonframework.commandhandling.model.AggregateLifecycle.apply
@@ -8,14 +9,14 @@ import org.axonframework.eventsourcing.EventSourcingHandler
 import org.axonframework.spring.stereotype.Aggregate
 import java.time.LocalDateTime
 
-// TODO Logger benutzen!
-//private val logger = KotlinLogging.logger {}
 
 @Aggregate
 class Recipe {
 
+    companion object : KLogging()
+
     @AggregateIdentifier
-            //var recipeId: RecipeId? = null TODO Query Handler spielt noch nicht mit einem Nicht String zusammen
+    //var recipeId: RecipeId? = null TODO Query Handler spielt noch nicht mit einem Nicht String zusammen
     var recipeId: String? = null
     var creationDate: LocalDateTime? = null
     var userProfileId = ""
@@ -34,38 +35,40 @@ class Recipe {
 
     @CommandHandler
     constructor(cmd: CreateRecipeCommand) {
+        logger.info { cmd }
         apply(
-            RecipeCreatedEvent(
-                    cmd.recipeId,
-                    LocalDateTime.now(),
-                    cmd.userProfileId,
-                    cmd.name,
-                    EvtImage(cmd.image.imageId, cmd.image.extension),
-                    cmd.effort,
-                    cmd.category,
-                    cmd.nutrition,
-                    cmd.preparationTime,
-                    cmd.restTime,
-                    cmd.ingredients,
-                    cmd.preparations,
-                    cmd.testField)
+                RecipeCreatedEvent(
+                        cmd.recipeId,
+                        LocalDateTime.now(),
+                        cmd.userProfileId,
+                        cmd.name,
+                        EvtImage(cmd.image.imageId, cmd.image.extension),
+                        cmd.effort,
+                        cmd.category,
+                        cmd.nutrition,
+                        cmd.preparationTime,
+                        cmd.restTime,
+                        cmd.ingredients,
+                        cmd.preparations,
+                        cmd.testField)
         )
     }
 
     @CommandHandler
     fun handle(cmd: UpdateRecipeCommand) {
+        logger.info { cmd }
         apply(
-            RecipeUpdatedEvent(
-                    cmd.recipeId,
-                    cmd.name,
-                    cmd.effort,
-                    cmd.category,
-                    cmd.nutrition,
-                    cmd.preparationTime,
-                    cmd.restTime,
-                    cmd.ingredients,
-                    cmd.preparations,
-                    cmd.testField))
+                RecipeUpdatedEvent(
+                        cmd.recipeId,
+                        cmd.name,
+                        cmd.effort,
+                        cmd.category,
+                        cmd.nutrition,
+                        cmd.preparationTime,
+                        cmd.restTime,
+                        cmd.ingredients,
+                        cmd.preparations,
+                        cmd.testField))
     }
 
     @CommandHandler
@@ -91,8 +94,6 @@ class Recipe {
 
     @EventSourcingHandler
     fun on(evt: RecipeUpdatedEvent) {
-        println(evt)
-        println("RecipeUpdatedEvent testField=" + evt.testField)
         name = evt.name
         effort = evt.effort
         category = evt.category
@@ -106,7 +107,6 @@ class Recipe {
 
     @EventSourcingHandler
     fun on(evt: RecipeDeletedEvent) {
-        println(evt)
         markDeleted()
     }
 }
