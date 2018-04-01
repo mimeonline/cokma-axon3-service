@@ -43,6 +43,7 @@ class WebSecurity(
                 .and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers(HttpMethod.GET, "/images/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/recipes/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/recipes").permitAll()
                 .antMatchers(HttpMethod.GET, "/timeline/recipes").permitAll()
                 .anyRequest().authenticated()
