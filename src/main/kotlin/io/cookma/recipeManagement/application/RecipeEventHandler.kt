@@ -59,7 +59,6 @@ class RecipeEventHandler {
         recipe.restTime = evt.restTime
         recipe.ingredients = evt.ingredients
         recipe.preparations = evt.preparations
-        println(recipe)
         recipeRepository.save(recipe)
     }
 

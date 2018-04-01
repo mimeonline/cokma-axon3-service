@@ -1,6 +1,5 @@
 package io.cookma.authservice.infrastructure.security
 
-import io.cookma.authservice.infrastructure.UserRepository
 import io.cookma.authservice.infrastructure.security.SecurityConstants.SIGN_UP_URL
 import io.cookma.usermanagement.infrastructure.repository.UserProfileRepository
 import org.springframework.http.HttpMethod
@@ -31,13 +30,13 @@ class WebSecurity(
     override fun configure(http: HttpSecurity) {
         http
                 .cors().configurationSource(object : CorsConfigurationSource {
-                   override fun getCorsConfiguration(request: HttpServletRequest): CorsConfiguration {
-                       var corsConfiguration = CorsConfiguration()
-                       corsConfiguration.addAllowedOrigin(CorsConfiguration.ALL)
-                       corsConfiguration.setAllowedMethods(Arrays.asList("GET", "HEAD", "POST", "DELETE", "PUT","OPTION"))
-                       corsConfiguration.addAllowedHeader(CorsConfiguration.ALL)
-                       corsConfiguration.setAllowCredentials(true)
-                       corsConfiguration.setMaxAge(1800L)
+                    override fun getCorsConfiguration(request: HttpServletRequest): CorsConfiguration {
+                        var corsConfiguration = CorsConfiguration()
+                        corsConfiguration.addAllowedOrigin(CorsConfiguration.ALL)
+                        corsConfiguration.allowedMethods = Arrays.asList("GET", "HEAD", "POST", "DELETE", "PUT", "OPTION")
+                        corsConfiguration.addAllowedHeader(CorsConfiguration.ALL)
+                        corsConfiguration.allowCredentials = true
+                        corsConfiguration.maxAge = 1800L
                         return corsConfiguration
                     }
                 })
@@ -45,9 +44,10 @@ class WebSecurity(
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers(HttpMethod.GET, "/images/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/recipes").permitAll()
+                .antMatchers(HttpMethod.GET, "/timeline/recipes").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .addFilter(JWTAuthenticationFilter(authenticationManager(),userProfileRepository))
+                .addFilter(JWTAuthenticationFilter(authenticationManager(), userProfileRepository))
                 .addFilter(JWTAuthorizationFilter(authenticationManager()))
                 // this disables session creation on Spring Security
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

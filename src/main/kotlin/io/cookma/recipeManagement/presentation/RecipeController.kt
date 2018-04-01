@@ -7,10 +7,6 @@ import io.cookma.recipeManagement.application.RecipeProjection
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import java.util.concurrent.CompletableFuture
-import org.springframework.web.bind.annotation.RequestMapping
-
-
 
 
 @RestController
@@ -23,24 +19,19 @@ class RecipeController {
 
 
     @GetMapping
-    fun getAllRecipe(): List<RecipeProjection>? {
-        return recipeApplicationService.findAllRecipe()
-    }
+    fun getAllRecipe(): List<RecipeProjection>? = recipeApplicationService.findAllRecipe()
 
     @GetMapping("/{id}")
     fun getRecipe(@PathVariable("id") id: String) = recipeApplicationService.findRecipeById(id)
-
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     fun createRecipe(@RequestBody recipe: RecipeDto) = recipeApplicationService.createRecipe(recipe)
 
-
     @PutMapping("/{id}")
     fun updateRecipe(
             @RequestBody recipe: RecipeEditDto,
             @PathVariable("id") id: String) = recipeApplicationService.updateRecipe(id, recipe)
-
 
     @DeleteMapping("/{id}")
     fun deleteRecipe(@PathVariable("id") id: String) = recipeApplicationService.deleteRecipe(id)
