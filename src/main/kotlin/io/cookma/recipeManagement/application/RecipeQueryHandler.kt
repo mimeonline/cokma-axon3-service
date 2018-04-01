@@ -17,6 +17,9 @@ class RecipeQueryHandler {
         return model
     }
 
+    /**
+     * TODO Wird zur Zeit nicht benutzt siehe Kommentar: RecipeApplicationService.findAllRecipe
+     */
     @QueryHandler
     fun handle(query: RecipeFindAllQuery): List<RecipeProjection> {
         var models: List<RecipeProjection> = recipeRepository.findAllByOrderByLastModificationDateDesc()

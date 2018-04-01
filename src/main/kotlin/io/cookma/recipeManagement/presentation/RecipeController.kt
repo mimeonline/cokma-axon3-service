@@ -3,6 +3,7 @@ package io.cookma.recipeManagement.presentation
 import io.cookma.recipeManagement.application.RecipeApplicationService
 import io.cookma.recipeManagement.application.RecipeDto
 import io.cookma.recipeManagement.application.RecipeEditDto
+import io.cookma.recipeManagement.application.RecipeProjection
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
@@ -22,7 +23,7 @@ class RecipeController {
 
 
     @GetMapping
-    fun getAllRecipe(): CompletableFuture<List<*>>? {
+    fun getAllRecipe(): List<RecipeProjection>? {
         return recipeApplicationService.findAllRecipe()
     }
 
