@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.context.annotation.Primary
 import java.net.UnknownHostException
 
 
@@ -37,39 +36,29 @@ class AxonConfiguration {
 
     @Bean
     @Qualifier("eventSerializer")
-    fun axonJsonSerializer(): Serializer {
-        return JacksonSerializer(jacksonObjectMapper())
-    }
+    fun axonJsonSerializer(): Serializer = JacksonSerializer(jacksonObjectMapper())
 
     @Autowired
-    fun configureProcessors(eventHandlingConfiguration: EventHandlingConfiguration) {
-        eventHandlingConfiguration.usingTrackingProcessors()
-    }
+    fun configureProcessors(eventHandlingConfiguration: EventHandlingConfiguration) = eventHandlingConfiguration.usingTrackingProcessors()
 
     @Bean
-    fun getMongoTokenStore(): TokenStore {
-        return MongoTokenStore(axonMongoTemplate(), axonXmlSerializer)
-    }
+    fun getMongoTokenStore(): TokenStore = MongoTokenStore(axonMongoTemplate(), axonXmlSerializer)
 
 
     @Bean
-    fun eventStorageEngine(): MongoEventStorageEngine {
-        return MongoEventStorageEngine(
-                axonJsonSerializer(), upcasterChain(), axonMongoTemplate(), DocumentPerEventStorageStrategy())
-    }
+    fun eventStorageEngine(): MongoEventStorageEngine = MongoEventStorageEngine(
+            axonJsonSerializer(), upcasterChain(), axonMongoTemplate(), DocumentPerEventStorageStrategy())
+
 
     @Bean
     fun upcasterChain(): EventUpcaster = EventUpcasterChain(RecipeCreateOrUpdatedEventUpcaster())
 
     @Bean
-    fun axonMongoTemplate(): MongoTemplate {
-        return DefaultMongoTemplate(mongoClient())
-    }
+    fun axonMongoTemplate(): MongoTemplate = DefaultMongoTemplate(mongoClient())
 
 
     @Bean
     @Throws(UnknownHostException::class)
-    fun mongoClient(): MongoClient {
-        return MongoClient(mongodbHost, mongoDBPort)
-    }
+    fun mongoClient(): MongoClient = MongoClient(mongodbHost, mongoDBPort)
+
 }
