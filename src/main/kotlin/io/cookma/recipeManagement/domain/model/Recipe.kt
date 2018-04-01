@@ -28,12 +28,12 @@ class Recipe {
     var restTime: Int = 0
     var ingredients: List<Ingredient> = listOf()
     var preparations: List<Preparation> = listOf()
+    var testField: String = ""
 
     constructor()
 
     @CommandHandler
     constructor(cmd: CreateRecipeCommand) {
-        println(cmd)
         apply(
             RecipeCreatedEvent(
                     cmd.recipeId,
@@ -47,7 +47,8 @@ class Recipe {
                     cmd.preparationTime,
                     cmd.restTime,
                     cmd.ingredients,
-                    cmd.preparations)
+                    cmd.preparations,
+                    cmd.testField)
         )
     }
 
@@ -63,18 +64,17 @@ class Recipe {
                     cmd.preparationTime,
                     cmd.restTime,
                     cmd.ingredients,
-                    cmd.preparations))
+                    cmd.preparations,
+                    cmd.testField))
     }
 
     @CommandHandler
     fun handle(cmd: DeleteRecipeCommand) {
-        println("Delete Command " + cmd)
         apply(RecipeDeletedEvent(cmd.recipeId, EvtImage(image.imageId, image.extension)))
     }
 
     @EventSourcingHandler
     fun on(evt: RecipeCreatedEvent) {
-        println(evt)
         recipeId = evt.recipeId
         userProfileId = evt.userProfileId
         name = evt.name
@@ -86,11 +86,13 @@ class Recipe {
         restTime = evt.restTime
         ingredients = evt.ingredients
         preparations = evt.preparations
+        testField = evt.testField
     }
 
     @EventSourcingHandler
     fun on(evt: RecipeUpdatedEvent) {
         println(evt)
+        println("RecipeUpdatedEvent testField=" + evt.testField)
         name = evt.name
         effort = evt.effort
         category = evt.category
@@ -99,11 +101,12 @@ class Recipe {
         restTime = evt.restTime
         ingredients = evt.ingredients
         preparations = evt.preparations
+        testField = evt.testField
     }
 
     @EventSourcingHandler
     fun on(evt: RecipeDeletedEvent) {
-        println("Delete Event: " + evt)
+        println(evt)
         markDeleted()
     }
 }

@@ -7,6 +7,7 @@ import io.cookma.recipeManagement.domain.model.RecipeUpdatedEvent
 import io.cookma.recipeManagement.infrastructure.repository.RecipeRepository
 import io.cookma.recipeManagement.infrastructure.store.RecipeImageStore
 import io.cookma.usermanagement.infrastructure.repository.UserProfileRepository
+import org.axonframework.config.ProcessingGroup
 import org.axonframework.eventhandling.EventHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component
  * Das Image Extension muß aus dem dataUri ausgelesen werden
  */
 @Component
+@ProcessingGroup("recipemanagement")
 class RecipeEventHandler {
 
     @Autowired
@@ -28,7 +30,6 @@ class RecipeEventHandler {
 
     @EventHandler
     fun handle(evt: RecipeCreatedEvent) {
-        println(evt)
         val imageUrl = "/images/" + evt.image.imageId + "." + evt.image.extension
         val userProfile = userProfileRepository.findByUserId(evt.userProfileId)
         recipeRepository.save(RecipeViewModel(
@@ -45,12 +46,12 @@ class RecipeEventHandler {
                 evt.preparationTime,
                 evt.restTime,
                 evt.ingredients,
-                evt.preparations))
+                evt.preparations,
+                evt.testField))
     }
 
     @EventHandler
     fun handle(evt: RecipeUpdatedEvent) {
-        println(evt)
         var recipe: RecipeViewModel = recipeRepository.findByRecipeId(evt.recipeId)
         recipe.name = evt.name
         recipe.effort = evt.effort
@@ -60,6 +61,7 @@ class RecipeEventHandler {
         recipe.restTime = evt.restTime
         recipe.ingredients = evt.ingredients
         recipe.preparations = evt.preparations
+        recipe.testField = evt.testField
         println(recipe)
         recipeRepository.save(recipe)
     }

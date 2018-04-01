@@ -25,6 +25,7 @@ class RecipeViewModel(
         var preparationTime: Int = 0,
         var restTime: Int = 0,
         var ingredients: List<Ingredient> = listOf(),
-        var preparations: List<Preparation> = listOf()) {
+        var preparations: List<Preparation> = listOf(),
+        var testField: String) {
 
 }

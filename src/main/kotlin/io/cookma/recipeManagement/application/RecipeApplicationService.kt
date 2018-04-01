@@ -48,7 +48,7 @@ class RecipeApplicationService {
         println(recipe)
         val image = storeImage(recipe)
 
-        return   commandGateway.send<CreateRecipeCommand>(
+        return commandGateway.send<CreateRecipeCommand>(
                 CreateRecipeCommand(
                         createRecipeId().id,
                         recipe.userId,
@@ -60,7 +60,8 @@ class RecipeApplicationService {
                         recipe.preparationTime,
                         recipe.restTime,
                         recipe.ingredients,
-                        recipe.preparations))
+                        recipe.preparations,
+                        recipe.testField))
     }
 
     private fun storeImage(recipe: RecipeDto): CmdImage {
@@ -72,6 +73,8 @@ class RecipeApplicationService {
     }
 
     fun updateRecipe(id: String, recipe: RecipeEditDto): CompletableFuture<UpdateRecipeCommand> {
+        println("recipe")
+        println("RecipeEditDto testField=" + recipe.testField)
         return commandGateway.send<UpdateRecipeCommand>(
                 UpdateRecipeCommand(
                         id,
@@ -82,7 +85,8 @@ class RecipeApplicationService {
                         recipe.preparationTime,
                         recipe.restTime,
                         recipe.ingredients,
-                        recipe.preparations))
+                        recipe.preparations,
+                        recipe.testField))
     }
 
     fun deleteRecipe(id: String) {
