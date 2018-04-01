@@ -5,10 +5,11 @@ import org.axonframework.serialization.SimpleSerializedType
 import org.axonframework.serialization.upcasting.event.IntermediateEventRepresentation
 import org.axonframework.serialization.upcasting.event.SingleEventUpcaster
 import org.dom4j.Document
-import org.springframework.context.annotation.Bean
 
-
-class RecipeCreateOrUpdatedEventUpcaster  : SingleEventUpcaster() {
+/**
+ * TODO Unused in moment. can be use as a template forEvent upcasting
+ */
+class RecipeCreateOrUpdatedEventUpcaster : SingleEventUpcaster() {
 
     override fun canUpcast(ir: IntermediateEventRepresentation): Boolean =
             recipeUpdated("1.0") == ir.type || recipeCreated("1.0") == ir.type

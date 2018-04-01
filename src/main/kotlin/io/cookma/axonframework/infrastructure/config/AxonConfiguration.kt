@@ -49,9 +49,11 @@ class AxonConfiguration {
     fun eventStorageEngine(): MongoEventStorageEngine = MongoEventStorageEngine(
             axonJsonSerializer(), upcasterChain(), axonMongoTemplate(), DocumentPerEventStorageStrategy())
 
-
+    /**
+     * For Upcasting use the Upcast Example: EventUpcasterChain(RecipeCreateOrUpdatedEventUpcaster())
+     */
     @Bean
-    fun upcasterChain(): EventUpcaster = EventUpcasterChain(RecipeCreateOrUpdatedEventUpcaster())
+    fun upcasterChain(): EventUpcaster = EventUpcasterChain()
 
     @Bean
     fun axonMongoTemplate(): MongoTemplate = DefaultMongoTemplate(mongoClient())

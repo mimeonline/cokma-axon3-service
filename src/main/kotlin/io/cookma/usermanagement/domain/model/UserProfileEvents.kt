@@ -3,7 +3,7 @@ package io.cookma.usermanagement.domain.model
 import org.axonframework.serialization.Revision
 import java.time.LocalDateTime
 
-@Revision("1.0")
+@Revision("1")
 data class UserProfileCreatedEvent(
         val userId: String,
         val creationDate: LocalDateTime,
@@ -13,5 +13,5 @@ data class UserProfileCreatedEvent(
         val lastname: String
 )
 
-@Revision("1.0")
+@Revision("1")
 data class UserProfileDeletedEvent(val userId: String)

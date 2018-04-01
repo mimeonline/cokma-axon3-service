@@ -13,8 +13,7 @@ data class RecipeDto(
         val restTime: Int,
         val ingredients: List<Ingredient>,
         val preparations: List<Preparation>,
-        val userId: String,
-        val testField: String
+        val userId: String
 )
 
 data class RecipeEditDto(
@@ -26,6 +25,5 @@ data class RecipeEditDto(
         val restTime: Int,
         val ingredients: List<Ingredient>,
         val preparations: List<Preparation>,
-        val userId: String,
-        val testField: String
+        val userId: String
 )
