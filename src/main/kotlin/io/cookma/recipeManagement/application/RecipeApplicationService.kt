@@ -1,10 +1,5 @@
 package io.cookma.recipeManagement.application
 
-import io.cookma.recipeManagement.application.dtoModel.RecipeDto
-import io.cookma.recipeManagement.application.dtoModel.RecipeEditDto
-import io.cookma.recipeManagement.application.queryModel.RecipeFindAllQuery
-import io.cookma.recipeManagement.application.queryModel.RecipeFindQueryById
-import io.cookma.recipeManagement.application.viewModel.RecipeViewModel
 import io.cookma.recipeManagement.domain.model.*
 import io.cookma.recipeManagement.infrastructure.store.RecipeImageStore
 import io.cookma.recipeManagement.utility.DataUri
@@ -31,9 +26,9 @@ class RecipeApplicationService {
     @Autowired
     lateinit var queryGateway: QueryGateway
 
-    fun findRecipeById(id: String): CompletableFuture<RecipeViewModel> {
+    fun findRecipeById(id: String): CompletableFuture<RecipeProjection> {
         println(id)
-        return queryGateway.send(RecipeFindQueryById(id), RecipeViewModel::class.java)
+        return queryGateway.query(RecipeFindQueryById(id), RecipeProjection::class.java)
     }
 
     /**
@@ -41,7 +36,7 @@ class RecipeApplicationService {
      * typisieren kann
      */
     fun findAllRecipe(): CompletableFuture<List<*>>? {
-        return queryGateway.send(RecipeFindAllQuery(), List::class.java)
+        return queryGateway.query(RecipeFindAllQuery(), List::class.java)
     }
 
     fun createRecipe(recipe: RecipeDto): CompletableFuture<CreateRecipeCommand> {

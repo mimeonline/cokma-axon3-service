@@ -1,4 +1,4 @@
-package io.cookma.recipeManagement.application.dtoModel
+package io.cookma.recipeManagement.application
 
 import io.cookma.recipeManagement.domain.model.Ingredient
 import io.cookma.recipeManagement.domain.model.Preparation

@@ -1,14 +1,12 @@
 package io.cookma.recipeManagement.presentation
 
 import io.cookma.recipeManagement.application.RecipeApplicationService
-import io.cookma.recipeManagement.application.dtoModel.RecipeDto
-import io.cookma.recipeManagement.application.dtoModel.RecipeEditDto
+import io.cookma.recipeManagement.application.RecipeDto
+import io.cookma.recipeManagement.application.RecipeEditDto
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import java.util.concurrent.CompletableFuture
-import javax.servlet.http.HttpServletResponse
-import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.RequestMapping
 
 

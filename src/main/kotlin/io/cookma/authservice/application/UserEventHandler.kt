@@ -16,7 +16,7 @@ class UserEventHandler {
 
     @EventHandler
     fun handle(evt: UserCreatedEvent) {
-        userRepository.save(UserViewModel(
+        userRepository.save(UserProjection(
                 evt.userId,
                 evt.userProfileId,
                 evt.username,

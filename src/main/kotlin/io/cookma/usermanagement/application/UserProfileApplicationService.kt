@@ -41,9 +41,9 @@ class UserProfileApplicationService {
         ))
     }
 
-    fun findUserProfileById(id: String): CompletableFuture<UserProfileViewModel> {
+    fun findUserProfileById(id: String): CompletableFuture<UserProfileProjection> {
         println(id)
-        return queryGateway.send(UserProfileFindQueryById(id), UserProfileViewModel::class.java)
+        return queryGateway.send(UserProfileFindQueryById(id), UserProfileProjection::class.java)
     }
 
     fun findAllUserProfiles(): CompletableFuture<List<*>>? {

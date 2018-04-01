@@ -33,11 +33,11 @@ class UserApplicationService {
                 bCryptPasswordEncoder.encode(dto.password)))
     }
 
-    fun findUserById(id: String): CompletableFuture<UserViewModel> {
-        return queryGateway.send(UserFindQueryById(id), UserViewModel::class.java)
+    fun findUserById(id: String): CompletableFuture<UserProjection> {
+        return queryGateway.send(UserFindQueryById(id), UserProjection::class.java)
     }
 
-    fun findUserProfileById(id: String): CompletableFuture<UserViewModel> {
-        return queryGateway.send(UserFindQueryByProfileId(id), UserViewModel::class.java)
+    fun findUserProfileById(id: String): CompletableFuture<UserProjection> {
+        return queryGateway.send(UserFindQueryByProfileId(id), UserProjection::class.java)
     }
 }

@@ -1,4 +1,4 @@
-package io.cookma.recipeManagement.application.viewModel
+package io.cookma.recipeManagement.application
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import io.cookma.recipeManagement.domain.model.Ingredient
@@ -7,8 +7,8 @@ import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import java.time.LocalDateTime
 
-@Document
-class RecipeViewModel(
+@Document(collection = "Recipe")
+class RecipeProjection(
 
         @Id
         @JsonIgnore

@@ -12,14 +12,14 @@ class UserProfileQueryHandler {
     lateinit var userProfileRepository: UserProfileRepository
 
     @QueryHandler
-    fun handle(query: UserProfileFindQueryById): UserProfileViewModel {
-        var model: UserProfileViewModel = userProfileRepository.findByUserId(query.id)
+    fun handle(query: UserProfileFindQueryById): UserProfileProjection {
+        var model: UserProfileProjection = userProfileRepository.findByUserId(query.id)
         return model
     }
 
     @QueryHandler
-    fun handle(query: UserProfileFindAllQuery): List<UserProfileViewModel> {
-        var models: List<UserProfileViewModel> = userProfileRepository.findAll()
+    fun handle(query: UserProfileFindAllQuery): List<UserProfileProjection> {
+        var models: List<UserProfileProjection> = userProfileRepository.findAll()
         return models
     }
 }

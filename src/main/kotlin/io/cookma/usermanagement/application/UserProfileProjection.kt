@@ -2,8 +2,8 @@ package io.cookma.usermanagement.application
 
 import org.springframework.data.mongodb.core.mapping.Document
 
-@Document
-class UserProfileViewModel(
+@Document(collection = "UserProfile")
+class UserProfileProjection(
         var userId: String = "",
         var email: String = "",
         var username: String = "",

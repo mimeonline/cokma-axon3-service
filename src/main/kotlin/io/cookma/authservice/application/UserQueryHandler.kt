@@ -12,13 +12,13 @@ class UserQueryHandler {
     lateinit var userRepositpory: UserRepository
 
     @QueryHandler
-    fun handle(query: UserFindQueryById): UserViewModel {
+    fun handle(query: UserFindQueryById): UserProjection {
         return userRepositpory.findByUserId(query.id)
     }
 
 
     @QueryHandler
-    fun handle(query: UserFindQueryByProfileId): UserViewModel {
+    fun handle(query: UserFindQueryByProfileId): UserProjection {
         return userRepositpory.findByUserProfileId(query.id)
     }
 

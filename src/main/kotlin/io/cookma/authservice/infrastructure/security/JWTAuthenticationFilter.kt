@@ -2,7 +2,7 @@ package io.cookma.authservice.infrastructure.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import io.cookma.authservice.application.UserViewModel
+import io.cookma.authservice.application.UserProjection
 import io.cookma.authservice.infrastructure.security.SecurityConstants.EXPIRATION_TIME
 import io.cookma.authservice.infrastructure.security.SecurityConstants.HEADER_STRING
 import io.cookma.authservice.infrastructure.security.SecurityConstants.SECRET
@@ -31,7 +31,7 @@ open class JWTAuthenticationFilter(private val authManager: AuthenticationManage
     override fun attemptAuthentication(request: HttpServletRequest,
                                        response: HttpServletResponse): Authentication {
         try {
-            val credentials = ObjectMapper().readValue(request.inputStream, UserViewModel::class.java)
+            val credentials = ObjectMapper().readValue(request.inputStream, UserProjection::class.java)
 
             return authManager.authenticate(
                     UsernamePasswordAuthenticationToken(

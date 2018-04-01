@@ -1,6 +1,5 @@
 package io.cookma.recipeManagement.application
 
-import io.cookma.recipeManagement.application.viewModel.RecipeViewModel
 import io.cookma.recipeManagement.domain.model.RecipeCreatedEvent
 import io.cookma.recipeManagement.domain.model.RecipeDeletedEvent
 import io.cookma.recipeManagement.domain.model.RecipeUpdatedEvent
@@ -32,7 +31,7 @@ class RecipeEventHandler {
     fun handle(evt: RecipeCreatedEvent) {
         val imageUrl = "/images/" + evt.image.imageId + "." + evt.image.extension
         val userProfile = userProfileRepository.findByUserId(evt.userProfileId)
-        recipeRepository.save(RecipeViewModel(
+        recipeRepository.save(RecipeProjection(
                 null,
                 evt.recipeId,
                 evt.creationDate,
@@ -52,7 +51,7 @@ class RecipeEventHandler {
 
     @EventHandler
     fun handle(evt: RecipeUpdatedEvent) {
-        var recipe: RecipeViewModel = recipeRepository.findByRecipeId(evt.recipeId)
+        var recipe: RecipeProjection = recipeRepository.findByRecipeId(evt.recipeId)
         recipe.name = evt.name
         recipe.effort = evt.effort
         recipe.category = evt.category
