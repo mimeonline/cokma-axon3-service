@@ -14,6 +14,6 @@ class TimelineApplicationService {
     @Autowired
     lateinit var timelineRepository: TimelineRepository
 
-    fun findAllRecipes() = recipeRepository.findAllByOrderByLastModificationDateDesc()
+    fun findAllRecipes() = timelineRepository.findAllByOrderByLastModificationDateDesc()
 
 }
