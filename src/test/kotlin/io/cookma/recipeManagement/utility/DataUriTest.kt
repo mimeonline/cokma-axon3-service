@@ -1,5 +1,6 @@
 package io.cookma.recipeManagement.utility
 
+import io.cookma.imagemanagement.utility.DataUri
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
 import org.junit.Before
@@ -7,7 +8,7 @@ import org.junit.Test
 
 class DataUriTest {
 
-    val dataUriString: String = "data:image/png;base64,iVBOR..."
+    private val dataUriString: String = "data:image/png;base64,iVBOR..."
 
     lateinit var dataUri: DataUri
 

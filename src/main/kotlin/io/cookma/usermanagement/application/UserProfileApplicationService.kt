@@ -5,6 +5,7 @@ import io.cookma.authservice.application.UserApplicationService
 import io.cookma.authservice.application.UserDto
 import io.cookma.usermanagement.domain.model.CreateUserProfileCommand
 import io.cookma.usermanagement.domain.model.DeleteUserProfileCommand
+import io.cookma.usermanagement.infrastructure.repository.UserProfileRepository
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.axonframework.queryhandling.QueryGateway
 import org.springframework.beans.factory.annotation.Autowired
@@ -20,6 +21,9 @@ class UserProfileApplicationService {
 
     @Autowired
     lateinit var queryGateway: QueryGateway
+
+    @Autowired
+    lateinit var userProfileRepository: UserProfileRepository
 
     @Autowired
     lateinit var userApplication: UserApplicationService
@@ -46,8 +50,8 @@ class UserProfileApplicationService {
         return queryGateway.send(UserProfileFindQueryById(id), UserProfileProjection::class.java)
     }
 
-    fun findAllUserProfiles(): CompletableFuture<List<*>>? {
-        return queryGateway.send(UserProfileFindAllQuery(), List::class.java)
+    fun findAllUserProfiles():  List<UserProfileProjection> {
+        return userProfileRepository.findAll()
     }
 
     fun deleteUserProfile(id: String) {

@@ -1,5 +1,6 @@
 package io.cookma.recipeManagement.infrastructure.store
 
+import io.cookma.imagemanagement.infrastructure.store.ImageStore
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -13,14 +14,14 @@ import java.util.*
  * - Move image to resource dir in the test package
  * - Use tempDir instead of fix path in the Project root
  */
-class RecipeImageStoreTest {
+class ImageStoreTest {
 
-    lateinit var recipeImageStore: RecipeImageStore
+    lateinit var imageStore: ImageStore
     lateinit var image: String
 
     @Before
     fun setUp() {
-//        recipeImageStore = RecipeImageStore()
+//        imageStore = ImageStore()
 //        image = createDataUri()
     }
 
@@ -34,7 +35,7 @@ class RecipeImageStoreTest {
         // given
 
         // when
-//        recipeImageStore.store("testdir", image)
+//        imageStore.store("testdir", image)
 //
 //        // then
 //        assertTrue(Files.exists(Paths.get("image-dir/testdir/image.png")))

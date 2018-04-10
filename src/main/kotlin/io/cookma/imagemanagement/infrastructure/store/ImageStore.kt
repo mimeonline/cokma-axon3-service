@@ -1,4 +1,4 @@
-package io.cookma.recipeManagement.infrastructure.store
+package io.cookma.imagemanagement.infrastructure.store
 
 import org.springframework.core.io.Resource
 import org.springframework.core.io.UrlResource
@@ -15,7 +15,7 @@ import javax.annotation.PostConstruct
 
 
 @Component
-class RecipeImageStore {
+class ImageStore {
 
 
     val imageLocation: Path = Paths.get("image-dir");
@@ -66,9 +66,7 @@ class RecipeImageStore {
     }
 
     fun deleteAll() {
-
         FileSystemUtils.deleteRecursively(imageLocation.toFile())
-
     }
 
     @PostConstruct

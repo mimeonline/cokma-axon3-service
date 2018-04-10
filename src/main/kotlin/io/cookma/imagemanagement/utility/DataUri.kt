@@ -1,6 +1,6 @@
-package io.cookma.recipeManagement.utility
+package io.cookma.imagemanagement.utility
 
-data class DataUri(val dataUri: String) {
+data class DataUri(private val dataUri: String) {
 
 
     fun type(): String {

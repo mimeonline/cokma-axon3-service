@@ -4,7 +4,7 @@ import io.cookma.recipeManagement.domain.model.RecipeCreatedEvent
 import io.cookma.recipeManagement.domain.model.RecipeDeletedEvent
 import io.cookma.recipeManagement.domain.model.RecipeUpdatedEvent
 import io.cookma.recipeManagement.infrastructure.repository.RecipeRepository
-import io.cookma.recipeManagement.infrastructure.store.RecipeImageStore
+import io.cookma.imagemanagement.infrastructure.store.ImageStore
 import io.cookma.usermanagement.infrastructure.repository.UserProfileRepository
 import org.axonframework.config.ProcessingGroup
 import org.axonframework.eventhandling.EventHandler
@@ -22,7 +22,7 @@ class RecipeEventHandler {
     lateinit var recipeRepository: RecipeRepository
 
     @Autowired
-    lateinit var recipeImageStore: RecipeImageStore
+    lateinit var imageStore: ImageStore
 
     @Autowired
     lateinit var userProfileRepository: UserProfileRepository
@@ -66,7 +66,7 @@ class RecipeEventHandler {
     fun handle(evt: RecipeDeletedEvent) {
         recipeRepository.deleteByRecipeId(evt.recipeId)
         var imageFile = evt.image.imageId + "." + evt.image.extension
-        recipeImageStore.deleteFile(imageFile)
+        imageStore.deleteFile(imageFile)
     }
 
 }

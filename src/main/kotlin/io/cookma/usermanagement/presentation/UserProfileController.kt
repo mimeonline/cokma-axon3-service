@@ -16,18 +16,14 @@ class UserProfileController {
 
     @PostMapping("/register")
     @ResponseStatus(value = HttpStatus.CREATED)
-    fun registerUser(@RequestBody registerUser: RegisterUserDto) =
-            userProfileApplicationService.registerUser(registerUser)
+    fun registerUser(@RequestBody registerUser: RegisterUserDto) = userProfileApplicationService.registerUser(registerUser)
 
     @GetMapping("/{userid}")
-    fun findUserByUserId(@PathVariable("userid") userId: String) =
-            userProfileApplicationService.findUserProfileById(userId)
+    fun findUserByUserId(@PathVariable("userid") userId: String) = userProfileApplicationService.findUserProfileById(userId)
 
     @RequestMapping
-    fun findUsers() =
-            userProfileApplicationService.findAllUserProfiles()
+    fun findUsers() = userProfileApplicationService.findAllUserProfiles()
 
     @DeleteMapping("/{id}")
-    fun deleteRecipe(@PathVariable("id") id: String) =
-            userProfileApplicationService.deleteUserProfile(id)
+    fun deleteRecipe(@PathVariable("id") id: String) = userProfileApplicationService.deleteUserProfile(id)
 }

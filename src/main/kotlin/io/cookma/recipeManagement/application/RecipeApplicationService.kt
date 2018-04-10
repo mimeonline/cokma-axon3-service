@@ -1,9 +1,10 @@
 package io.cookma.recipeManagement.application
 
+import io.cookma.imagemanagement.application.ImageApplicationService
 import io.cookma.recipeManagement.domain.model.*
 import io.cookma.recipeManagement.infrastructure.repository.RecipeRepository
-import io.cookma.recipeManagement.infrastructure.store.RecipeImageStore
-import io.cookma.recipeManagement.utility.DataUri
+import io.cookma.imagemanagement.infrastructure.store.ImageStore
+import io.cookma.imagemanagement.utility.DataUri
 import io.cookma.usermanagement.infrastructure.repository.UserProfileRepository
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.axonframework.queryhandling.QueryGateway
@@ -16,7 +17,7 @@ import java.util.concurrent.CompletableFuture
 class RecipeApplicationService {
 
     @Autowired
-    lateinit var recipeImageStore: RecipeImageStore
+    lateinit var imageApplicationService: ImageApplicationService
 
     @Autowired
     lateinit var userProfileRepository: UserProfileRepository
@@ -45,7 +46,7 @@ class RecipeApplicationService {
     }
 
     fun createRecipe(recipe: RecipeDto): CompletableFuture<CreateRecipeCommand> {
-        val image = storeImage(recipe)
+        val image = imageApplicationService.storeImage(recipe)
 
         return commandGateway.send<CreateRecipeCommand>(
                 CreateRecipeCommand(
@@ -60,14 +61,6 @@ class RecipeApplicationService {
                         recipe.restTime,
                         recipe.ingredients,
                         recipe.preparations))
-    }
-
-    private fun storeImage(recipe: RecipeDto): CmdImage {
-        val imageId = UUID.randomUUID().toString()
-        val extension = DataUri(recipe.image).extension()
-        val image = CmdImage(imageId, extension)
-        recipeImageStore.store(imageId, recipe.image)
-        return image
     }
 
     fun updateRecipe(id: String, recipe: RecipeEditDto): CompletableFuture<UpdateRecipeCommand> {
